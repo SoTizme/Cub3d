@@ -28,6 +28,8 @@ typedef struct s_elem
 }				t_elem;
 
 int		parser(t_elem *val, char *file_name);
+int		check_file_format(char *file_name, char *ext);
+int		check_texture(t_elem *val, t_list *map);
 void	ft_error(char *error_msg);
 
 #endif
