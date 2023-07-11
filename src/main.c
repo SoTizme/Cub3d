@@ -19,5 +19,4 @@ int	main(int ac, char **av)
 		printf("%s", val.map->content);
 		val.map = val.map->next;
 	}
-	//printf("hello world!\n");
 }
