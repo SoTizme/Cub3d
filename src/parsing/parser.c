@@ -28,7 +28,7 @@ int	parser(t_elem *val, char *file_name)
 		ft_error("File doesn't exict");
 	while ((line = get_next_line(fd)))
 	{
-		printf("%s\n", line);
+		ft_lstadd_back(&val->map, ft_lstnew(line));
 	}
 	return (0);
 }

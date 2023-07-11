@@ -12,7 +12,12 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		ft_error("You have more/less 2 argument");
-	
+	val = (t_elem){0};
 	parser(&val, av[1]);
+	while (val.map)
+	{
+		printf("%s", val.map->content);
+		val.map = val.map->next;
+	}
 	//printf("hello world!\n");
 }
