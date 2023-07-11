@@ -11,12 +11,15 @@ CFLAGS = -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME) : $(SRCS) $(UTLS)
-	$(CC) $(CFLAGS) $(SRCS) $(UTLS) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	@make -C libft
+	$(CC) $(CFLAGS) libft/libft.a $(SRCS) $(UTLS) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 clean:
+	@make clean -C libft
 	$(RM) $(NAME)
 
 fclean: clean
+	@make fclean -C libft
 
 re: fclean all
 

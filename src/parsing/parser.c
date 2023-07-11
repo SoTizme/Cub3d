@@ -1,22 +1,33 @@
 #include "../../includes/cub3d.h"
 
-int	parser(t_elem *val)
+int	is_valid_ext(char *file_name, char *ext)
+{
+	char	*last_accur;
+
+	last_accur = ft_strrchr(file_name, '.');
+	if (!last_accur || ft_strlen(last_accur) < ft_strlen(ext))
+		return (0);
+	return (ft_strcmp(last_accur, ext) == 0);
+}
+
+void	check_file_format(char *file_name)
+{
+	if (!is_valid_ext(file_name, ".cub"))
+		ft_error("Please check file format .cub");
+}
+
+int	parser(t_elem *val, char *file_name)
 {
 	int		fd;
 	char	*line;
 
 	(void)val;
-	fd = open("../../utils/map.cub", O_RDONLY);
-	printf("hello world! %d\n", fd);
-	// while ((line = get_next_line(fd)))
-	// {
-	// 	printf("%s\n", line);
-	// }
-	while (1)
+	check_file_format(file_name);
+	fd = open(file_name, O_RDONLY);
+	if (fd == -1)
+		ft_error("File doesn't exict");
+	while ((line = get_next_line(fd)))
 	{
-		line = get_next_line(fd);
-		if (!line)
-			break;
 		printf("%s\n", line);
 	}
 	return (0);
