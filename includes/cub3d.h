@@ -11,17 +11,21 @@
 
 // structs :
 
-// typedef struct s_list
-// {
-// 	char			*content;
-// 	struct s_list	*next;
-// }					t_list;
+typedef struct s_txtur
+{
+	char		*no;
+	char		*so;
+	char		*we;
+	char		*ea;
+	int			**f;
+	int			**c;
+}				t_txtur;
 
 typedef struct s_elem
 {
-	t_list		*map;
+	t_txtur		*txtur;
+	char		*map;
 }				t_elem;
-
 
 int		parser(t_elem *val, char *file_name);
 void	ft_error(char *error_msg);

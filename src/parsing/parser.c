@@ -17,14 +17,16 @@ int	parser(t_elem *val, char *file_name)
 {
 	int		fd;
 	char	*line;
+	t_list	*map;
 
+	map = NULL;
 	(void)val;
 	check_file_format(file_name);
 	if ((fd = open(file_name, O_RDONLY)) == -1)
 		ft_error("File doesn't exict");
 	while ((line = get_next_line(fd)))
 	{
-		ft_lstadd_back(&val->map, ft_lstnew(line));
+		ft_lstadd_back(&map, ft_lstnew(line));
 	}
 	return (0);
 }
