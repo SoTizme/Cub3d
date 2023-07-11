@@ -1,8 +1,8 @@
 NAME = cub3d
 
-SRCS =  main.c
+SRCS =  src/main.c
 
-UTLS = get_next_line/get_next_line_utils.c get_next_line/get_next_line.c
+UTLS = src/get_line/get_next_line_utils.c src/get_line/get_next_line.c
 
 RM = rm -f
 CC = cc
