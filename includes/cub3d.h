@@ -27,9 +27,13 @@ typedef struct s_elem
 	char		*map;
 }				t_elem;
 
+// Parsing :
+
 int		parser(t_elem *val, char *file_name);
 int		check_file_format(char *file_name, char *ext);
-int		check_texture(t_elem *val, t_list *map);
+int		check_texture(t_elem *val, t_list **map);
 void	ft_error(char *error_msg);
+void	texture_error(char *chr, char **s);
+void	double_free(char **s);
 
 #endif

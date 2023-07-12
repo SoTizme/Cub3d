@@ -6,7 +6,7 @@
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 17:26:42 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/11 17:43:56 by shilal           ###   ########.fr       */
+/*   Updated: 2023/07/12 18:37:19 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	parser(t_elem *val, char *file_name)
 	t_list	*map;
 
 	map = NULL;
+	(void)val;
 	if (!check_file_format(file_name, ".cub"))
 		ft_error("Please check file format .cub");
 	if ((fd = open(file_name, O_RDONLY)) == -1)
@@ -40,12 +41,7 @@ int	parser(t_elem *val, char *file_name)
 		ft_lstadd_back(&map, ft_lstnew(ft_strdup(line)));
 		free(line);
 	}
-	check_texture(val, map);
-	while (map)
-	{
-		printf("%s", map->content);
-		map = map->next;
-	}
-	//while (2);
+	check_texture(val, &map);
+	// system("leaks cub3d");
 	return (0);
 }
