@@ -6,7 +6,7 @@
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 17:26:42 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/12 18:37:19 by shilal           ###   ########.fr       */
+/*   Updated: 2023/07/13 13:36:06 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,9 @@ int	parser(t_elem *val, char *file_name)
 		ft_error("File doesn't exict");
 	while ((line = get_next_line(fd)))
 	{
-		ft_lstadd_back(&map, ft_lstnew(ft_strdup(line)));
+		ft_lstadd_back(&map, ft_lstnew(ft_strtrim(line, "\n")));
 		free(line);
 	}
 	check_texture(val, &map);
-	// system("leaks cub3d");
 	return (0);
 }

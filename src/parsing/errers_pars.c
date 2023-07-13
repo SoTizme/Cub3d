@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_pars.c                                       :+:      :+:    :+:   */
+/*   errers_pars.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 18:38:08 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/12 18:39:10 by shilal           ###   ########.fr       */
+/*   Updated: 2023/07/13 09:03:22 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,6 @@ void	texture_error(char *chr, char **s)
 		ft_error("Path to the west texture missing or somting wrong");
 	else if (!ft_strcmp(chr, "EA"))
 		ft_error("Path to the east texture missing or somting wrong");
+	else
+		ft_error("Path of the color missing or somting wrong");
 }
