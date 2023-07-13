@@ -6,7 +6,7 @@
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 15:50:51 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/13 13:42:08 by shilal           ###   ########.fr       */
+/*   Updated: 2023/07/13 13:43:42 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void	check_texture(t_elem *val, t_list **map)
 	int		i;
 
 	tmp = *map;
-	i = 6;
+	i = 7;
 	while (tmp && i)
 	{
 		if (tmp->content[0])
