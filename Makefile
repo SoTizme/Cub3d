@@ -6,7 +6,7 @@ UTLS = src/get_line/get_next_line_utils.c src/get_line/get_next_line.c
 
 RM = rm -f
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
 
 all: $(NAME)
 

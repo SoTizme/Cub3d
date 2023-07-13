@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 17:26:42 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/13 13:36:06 by shilal           ###   ########.fr       */
+/*   Updated: 2023/07/13 14:01:13 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,23 @@ int	check_file_format(char *file_name, char *ext)
 	return (1);
 }
 
-int	parser(t_elem *val, char *file_name)
+int	parser(t_data *data, char *file_name)
 {
 	int		fd;
 	char	*line;
 	t_list	*map;
 
 	map = NULL;
-	(void)val;
 	if (!check_file_format(file_name, ".cub"))
 		ft_error("Please check file format .cub");
 	if ((fd = open(file_name, O_RDONLY)) == -1)
-		ft_error("File doesn't exict");
+		ft_error(strerror(errno));
 	while ((line = get_next_line(fd)))
 	{
 		ft_lstadd_back(&map, ft_lstnew(ft_strtrim(line, "\n")));
 		free(line);
 	}
-	check_texture(val, &map);
+	check_texture(data, &map);
+	ft_lstclear(&map, free);
 	return (0);
 }

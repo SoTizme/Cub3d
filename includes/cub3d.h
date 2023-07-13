@@ -8,6 +8,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <mlx.h>
+# include <errno.h>
 
 // structs :
 
@@ -31,13 +32,13 @@ typedef struct s_elem
 	int			t_so;
 	int			t_we;
 	int			t_ea;
-}				t_elem;
+}				t_data;
 
 // Parsing :
 
 int		check_file_format(char *file_name, char *ext);
-void	check_texture(t_elem *val, t_list **map);
-int		parser(t_elem *val, char *file_name);
+void	check_texture(t_data *dataa, t_list **map);
+int		parser(t_data *dataa, char *file_name);
 void	texture_error(char *chr, char **s);
 void	ft_error(char *error_msg);
 void	double_free(char **s);

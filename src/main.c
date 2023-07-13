@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 15:51:28 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/13 13:41:28 by shilal           ###   ########.fr       */
+/*   Updated: 2023/07/13 14:06:53 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,16 @@ char	*is_dgit(char *s)
 
 int	main(int ac, char **av)
 {
-	t_elem val;
+	t_data data;
 	t_txtur t;
 
-	val = (t_elem){0};
+	data = (t_data){0};
 	t = (t_txtur){0};
 	t.c = (int *)malloc(3 * sizeof(int));
 	t.f = (int *)malloc(3 * sizeof(int));
-	val.txtur = &t;
+	data.txtur = &t;
 	if (ac != 2)
 		ft_error("You have more/less 2 argument");
-	parser(&val, av[1]);
+	parser(&data, av[1]);
+	// system("leaks cub3d");
 }
