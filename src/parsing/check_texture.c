@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 15:50:51 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/13 14:06:34 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/07/13 14:47:59 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,17 +132,19 @@ void	check_texture(t_data *data, t_list **map)
 		data->t_c != 3 ||data->t_f != 3)
 		ft_error("Check if any texture/color missing Or double");
 	else
-	{
-		int i = 0;
-		printf("%s\n", data->txtur->no);
-		printf("%s\n", data->txtur->so);
-		printf("%s\n", data->txtur->we);
-		printf("%s\n", data->txtur->ea);
-		while (i < 3)
-		{
-			printf("F : %d\n", data->txtur->f[i]);
-			printf("C : %d\n", data->txtur->c[i]);
-			i++;
-		}
-	}
+		check_map(data, map);
+	// else
+	// {
+	// 	int i = 0;
+	// 	printf("%s\n", data->txtur->no);
+	// 	printf("%s\n", data->txtur->so);
+	// 	printf("%s\n", data->txtur->we);
+	// 	printf("%s\n", data->txtur->ea);
+	// 	while (i < 3)
+	// 	{
+	// 		printf("F : %d\n", data->txtur->f[i]);
+	// 		printf("C : %d\n", data->txtur->c[i]);
+	// 		i++;
+	// 	}
+	// }
 }

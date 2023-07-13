@@ -1,6 +1,6 @@
 NAME = cub3d
 
-SRCS =  src/main.c src/parsing/parser.c src/parsing/check_texture.c src/parsing/errers_pars.c
+SRCS =  src/main.c src/parsing/parser.c src/parsing/check_texture.c src/parsing/errers_pars.c src/parsing/check_map.c
 
 UTLS = src/get_line/get_next_line_utils.c src/get_line/get_next_line.c
 

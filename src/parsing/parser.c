@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 17:26:42 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/13 14:01:13 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/07/13 14:55:13 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	parser(t_data *data, char *file_name)
 		ft_lstadd_back(&map, ft_lstnew(ft_strtrim(line, "\n")));
 		free(line);
 	}
+	if (!map)
+		ft_error("We have a empty file");
 	check_texture(data, &map);
 	ft_lstclear(&map, free);
 	return (0);
