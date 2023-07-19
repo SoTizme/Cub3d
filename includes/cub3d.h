@@ -22,16 +22,22 @@ typedef struct s_txtur
 	int			*c;
 }				t_txtur;
 
-typedef struct s_data
+typedef struct s_check
 {
-	t_txtur		*txtur;
-	char		**map;
 	int			t_c;
 	int			t_f;
 	int			t_no;
 	int			t_so;
 	int			t_we;
 	int			t_ea;
+}				t_check;
+
+
+typedef struct s_data
+{
+	t_txtur		*txtur;
+	char		**map;
+	t_check		*check;
 }				t_data;
 
 // Parsing :
@@ -41,6 +47,10 @@ void	check_texture(t_data *dataa, t_list **map);
 int		parser(t_data *dataa, char *file_name);
 void	check_map(t_data *data, t_list **map);
 void	texture_error(char *chr, char **s);
+
+// Utils parsing :
+int		get_the_tall_line(t_list **map);
+char	*my_strdup(char *s, int len);
 void	ft_error(char *error_msg);
 void	double_free(char **s);
 char	*is_dgit(char *s);
