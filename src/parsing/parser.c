@@ -6,7 +6,7 @@
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 17:26:42 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/19 15:36:54 by shilal           ###   ########.fr       */
+/*   Updated: 2023/07/20 18:05:41 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,27 @@ int	check_file_format(char *file_name, char *ext)
 	if (ft_strcmp(last_accur, ext) != 0)
 		return (0);
 	return (1);
+}
+
+void	get_position(t_data *data)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (data->map[++i])
+	{
+		j = -1;
+		while (data->map[i][++j])
+		{
+			if (data->map[i][j] == 'N' || data->map[i][j] == 'W' || 
+				data->map[i][j] == 'S' || data->map[i][j] == 'E')
+			{
+				data->x_player = j;
+				data->y_player = i;
+			}
+		}
+	}
 }
 
 int	parser(t_data *data, char *file_name)
@@ -43,6 +64,7 @@ int	parser(t_data *data, char *file_name)
 	if (!map)
 		ft_error("We have a empty file");
 	check_texture(data, &map);
+	get_position(data);
 	ft_lstclear(&map, free);
 	return (0);
 }

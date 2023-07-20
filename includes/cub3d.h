@@ -30,8 +30,6 @@ typedef struct s_check
 	int			t_so;
 	int			t_we;
 	int			t_ea;
-	int			y;
-	int			x;
 }				t_check;
 
 
@@ -40,6 +38,10 @@ typedef struct s_data
 	t_txtur		*txtur;
 	char		**map;
 	t_check		*check;
+	int			y;
+	int			x;
+	int			y_player;
+	int			x_player;
 }				t_data;
 
 // Parsing :

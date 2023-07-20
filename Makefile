@@ -1,19 +1,24 @@
 NAME = cub3d
 
-SRCS =  src/main.c src/parsing/parser.c src/parsing/check_texture.c src/parsing/errers_pars.c src/parsing/check_map.c\
-		src/parsing/utils_parsing.c
+SRCS = src/main.c
 
-UTLS = src/get_line/get_next_line_utils.c src/get_line/get_next_line.c
+PFILES = parser.c check_texture.c errers_pars.c check_map.c utils_parsing.c
+
+GTL = get_next_line_utils.c get_next_line.c
+
+PFILES := $(addprefix src/parsing/, $(PFILES))
+
+GTL := $(addprefix src/get_line/, $(GTL))
 
 RM = rm -f
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
 
 all: $(NAME)
 
-$(NAME) : $(SRCS) $(UTLS)
+$(NAME) : $(SRCS) $(GTL) $(PFILES)
 	@make -C libft
-	$(CC) $(CFLAGS) libft/libft.a $(SRCS) $(UTLS) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	$(CC) $(CFLAGS) libft/libft.a $(SRCS) $(GTL) $(PFILES) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 clean:
 	@make clean -C libft

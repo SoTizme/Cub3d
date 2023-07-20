@@ -6,7 +6,7 @@
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:31:54 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/20 11:04:33 by shilal           ###   ########.fr       */
+/*   Updated: 2023/07/20 18:02:57 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,10 @@ int	get_the_tall_line(t_list **map)
 	len = 0;
 	while (tmp)
 	{
-		if (tmp->content[0])
-		{
-			if ((i = ft_strlen(tmp->content)) > len)
+		if (!tmp->content[0])
+			ft_error("Invalid map");
+		if ((i = ft_strlen(tmp->content)) > len)
 				len = i;
-		}
 		tmp = tmp->next;
 	}
 	return (len);
@@ -112,8 +111,6 @@ void	get_map(t_data *data, int len, t_list *tmp)
 	{
 		j = 0;
 		data->map[++i] = malloc(len + 1);
-		if (!tmp->content[j])
-			data->map[i] = ft_strdup("\n");
 		while (tmp->content[j])
 		{
 			c = tmp->content[j];

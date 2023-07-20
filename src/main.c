@@ -6,7 +6,7 @@
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 15:51:28 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/19 15:19:46 by shilal           ###   ########.fr       */
+/*   Updated: 2023/07/20 17:52:24 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,4 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		ft_error("You have more/less 2 argument");
 	parser(&data, av[1]);
-	//system("leaks cub3d");
 }

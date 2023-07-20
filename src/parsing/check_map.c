@@ -6,7 +6,7 @@
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 14:42:32 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/20 11:04:29 by shilal           ###   ########.fr       */
+/*   Updated: 2023/07/20 18:03:51 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	check_the_end(char *s, t_data *data, int j)
 	int	len;
 
 	i = 0;
-	len = data->check->x;
-	if (j == 0 || j == (data->check->y - 2))
+	len = data->x;
+	if (j == 0 || j == (data->y - 2))
 	{
 		while (i <= --len)
 		{
@@ -70,7 +70,7 @@ void	check_the_middle(t_data *data, int i, int j)
 	{
 		if (data->map[i][j] == ' ')
 		{
-			if (the_middle(data->map, j, i, data->check->y - 2) == 0)
+			if (the_middle(data->map, j, i, data->y - 2) == 0)
 				ft_error("Close your map");
 		}
 		j++;
@@ -110,8 +110,8 @@ void	check_map(t_data *data, t_list **map)
 
 	tmp = *map;
 	i = 0;
-	data->check->y = (my_lstsize(tmp));
-	data->map = (char **)malloc((data->check->y + 1) * sizeof(char *));
+	data->y = (my_lstsize(tmp));
+	data->map = (char **)malloc((data->y + 1) * sizeof(char *));
 	while (i < 6 || (!tmp->content[0]))
 	{
 		if (tmp->content[0])
@@ -119,8 +119,8 @@ void	check_map(t_data *data, t_list **map)
 		tmp = tmp->next;
 	}
 	check = tmp;
-	data->check->x = get_the_tall_line(&check);
-	get_map(data, data->check->x, tmp);
+	data->x = get_the_tall_line(&check);
+	get_map(data, data->x, tmp);
 	i = data->check->t_ea + data->check->t_no + data->check->t_so;
 	if ((i + data->check->t_we) != 5)
 		ft_error("The position of player missing or is double in the map");
