@@ -6,7 +6,7 @@
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 15:50:51 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/20 17:53:13 by shilal           ###   ########.fr       */
+/*   Updated: 2023/07/21 13:28:53 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,12 +134,12 @@ void	texture(char *line, t_data *data)
 	double_free(l);
 }
 
-void	check_texture(t_data *data, t_list **map)
+void	check_texture(t_data *data)
 {
 	t_list *tmp;
 	int		i;
 
-	tmp = *map;
+	tmp = data->s_map;
 	i = 7;
 	while (tmp && i)
 	{
@@ -156,5 +156,5 @@ void	check_texture(t_data *data, t_list **map)
 		data->check->t_c != 3 ||data->check->t_f != 3)
 		ft_error("Check if any texture/color missing Or double");
 	else
-		check_map(data, map);
+		check_map(data);
 }

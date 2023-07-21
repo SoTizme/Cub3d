@@ -6,7 +6,7 @@
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 14:42:32 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/20 18:03:51 by shilal           ###   ########.fr       */
+/*   Updated: 2023/07/21 14:58:37 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,25 +102,15 @@ void	check_the_map(t_data *data)
 	}
 }
 
-void	check_map(t_data *data, t_list **map)
+void	check_map(t_data *data)
 {
-	t_list	*tmp;
-	t_list	*check;
 	int		i;
 
-	tmp = *map;
 	i = 0;
-	data->y = (my_lstsize(tmp));
+	data->y = (my_lstsize(data->s_map));
 	data->map = (char **)malloc((data->y + 1) * sizeof(char *));
-	while (i < 6 || (!tmp->content[0]))
-	{
-		if (tmp->content[0])
-			i++;
-		tmp = tmp->next;
-	}
-	check = tmp;
-	data->x = get_the_tall_line(&check);
-	get_map(data, data->x, tmp);
+	data->x = get_the_tall_line(data);
+	get_map(data, data->x);
 	i = data->check->t_ea + data->check->t_no + data->check->t_so;
 	if ((i + data->check->t_we) != 5)
 		ft_error("The position of player missing or is double in the map");

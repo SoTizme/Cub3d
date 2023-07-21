@@ -36,6 +36,7 @@ typedef struct s_check
 typedef struct s_data
 {
 	t_txtur		*txtur;
+	t_list		*s_map;
 	char		**map;
 	t_check		*check;
 	int			y;
@@ -47,19 +48,20 @@ typedef struct s_data
 // Parsing :
 
 int		check_file_format(char *file_name, char *ext);
-void	get_map(t_data *data, int len, t_list *tmp);
-void	check_texture(t_data *dataa, t_list **map);
 int		parser(t_data *dataa, char *file_name);
-void	check_map(t_data *data, t_list **map);
 void	texture_error(char *chr, char **s);
+void	get_map(t_data *data, int len);
+void	check_texture(t_data *data);
+void	check_map(t_data *data);
 
 // Utils parsing :
 void	cont_texture(t_data *data, char c);
-int		get_the_tall_line(t_list **map);
+int		get_the_tall_line(t_data *data);
 char	*my_strdup(char *s, int len);
 void	ft_error(char *error_msg);
 int		my_lstsize(t_list *lst);
 void	double_free(char **s);
+t_list	*skp_utils(t_list *lst);
 char	*is_dgit(char *s);
 
 #endif

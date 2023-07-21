@@ -6,7 +6,7 @@
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 17:26:42 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/20 18:05:41 by shilal           ###   ########.fr       */
+/*   Updated: 2023/07/21 14:35:15 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,22 +49,20 @@ int	parser(t_data *data, char *file_name)
 {
 	int		fd;
 	char	*line;
-	t_list	*map;
 
-	map = NULL;
 	if (!check_file_format(file_name, ".cub"))
 		ft_error("Please check file format .cub");
 	if ((fd = open(file_name, O_RDONLY)) == -1)
 		ft_error(strerror(errno));
 	while ((line = get_next_line(fd)))
 	{
-		ft_lstadd_back(&map, ft_lstnew(ft_strtrim(line, "\n")));
+		ft_lstadd_back(&data->s_map, ft_lstnew(ft_strtrim(line, "\n")));
 		free(line);
 	}
-	if (!map)
+	if (!data->s_map)
 		ft_error("We have a empty file");
-	check_texture(data, &map);
+	check_texture(data);
 	get_position(data);
-	ft_lstclear(&map, free);
+	//ft_lstclear(&data->s_map, free);
 	return (0);
 }
