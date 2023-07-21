@@ -6,7 +6,7 @@
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 15:50:51 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/21 13:28:53 by shilal           ###   ########.fr       */
+/*   Updated: 2023/07/21 15:16:27 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	util_color(t_data *data, char **colrs, char c, int i)
 	int	nb;
 
 	if (i > 2)
-			ft_error("The prototype of the color is ( N,N,N ) and N (0 -> 255)");
+		ft_error("The prototype of the color is ( N,N,N ) and N (0 -> 255)");
 	if (colrs[0] && !colrs[1])
 	{
 		nb = ft_atoi(is_dgit(colrs[0]));
@@ -115,7 +115,7 @@ void	texture(char *line, t_data *data)
 	char	**l;
 
 	l = get_texture(line);
-	if (!ft_strcmp(l[0], "NO") || !ft_strcmp(l[0], "SO") 
+	if (!ft_strcmp(l[0], "NO") || !ft_strcmp(l[0], "SO")
 		|| !ft_strcmp(l[0], "WE") || !ft_strcmp(l[0], "EA"))
 	{
 		if (l[1] && !l[2])
@@ -134,27 +134,27 @@ void	texture(char *line, t_data *data)
 	double_free(l);
 }
 
-void	check_texture(t_data *data)
+void	check_texture(t_data *d)
 {
-	t_list *tmp;
+	t_list	*tmp;
 	int		i;
 
-	tmp = data->s_map;
+	tmp = d->s_map;
 	i = 7;
 	while (tmp && i)
 	{
 		if (tmp->content[0])
 		{
-			texture(tmp->content, data);
-			check_color(data, tmp->content, 'F');
-			check_color(data, tmp->content, 'C');
+			texture(tmp->content, d);
+			check_color(d, tmp->content, 'F');
+			check_color(d, tmp->content, 'C');
 			i--;
 		}
 		tmp = tmp->next;
 	}
-	if (data->check->t_ea != 1 || data->check->t_so != 1 || data->check->t_no != 1 || data->check->t_we != 1 || 
-		data->check->t_c != 3 ||data->check->t_f != 3)
+	if (d->check->t_ea != 1 || d->check->t_so != 1 || d->check->t_no != 1
+		|| d->check->t_we != 1 || d->check->t_c != 3 || d->check->t_f != 3)
 		ft_error("Check if any texture/color missing Or double");
 	else
-		check_map(data);
+		check_map(d);
 }

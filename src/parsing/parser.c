@@ -6,7 +6,7 @@
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 17:26:42 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/21 14:35:15 by shilal           ###   ########.fr       */
+/*   Updated: 2023/07/21 15:16:09 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	get_position(t_data *data)
 		j = -1;
 		while (data->map[i][++j])
 		{
-			if (data->map[i][j] == 'N' || data->map[i][j] == 'W' || 
+			if (data->map[i][j] == 'N' || data->map[i][j] == 'W' ||
 				data->map[i][j] == 'S' || data->map[i][j] == 'E')
 			{
 				data->x_player = j;
@@ -52,10 +52,14 @@ int	parser(t_data *data, char *file_name)
 
 	if (!check_file_format(file_name, ".cub"))
 		ft_error("Please check file format .cub");
-	if ((fd = open(file_name, O_RDONLY)) == -1)
+	fd = open(file_name, O_RDONLY);
+	if (fd == -1)
 		ft_error(strerror(errno));
-	while ((line = get_next_line(fd)))
+	while (1337)
 	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
 		ft_lstadd_back(&data->s_map, ft_lstnew(ft_strtrim(line, "\n")));
 		free(line);
 	}
@@ -63,6 +67,5 @@ int	parser(t_data *data, char *file_name)
 		ft_error("We have a empty file");
 	check_texture(data);
 	get_position(data);
-	//ft_lstclear(&data->s_map, free);
 	return (0);
 }

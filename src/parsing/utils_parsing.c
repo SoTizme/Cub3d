@@ -6,7 +6,7 @@
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:31:54 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/21 14:43:19 by shilal           ###   ########.fr       */
+/*   Updated: 2023/07/21 15:14:54 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_list	*skp_utils(t_list *lst)
 	while (lst->next)
 	{
 		if (i > 6 && lst->content[0])
-			break;
+			break ;
 		if (lst->content[0])
 			i++;
 		lst = lst->next;
@@ -40,7 +40,7 @@ int	my_lstsize(t_list *lst)
 	while (lst)
 	{
 		if (i > 6 && lst->content[0])
-			break;
+			break ;
 		if (lst->content[0])
 			i++;
 		j++;
@@ -90,8 +90,11 @@ int	get_the_tall_line(t_data *data)
 	{
 		if (!tmp->content[0])
 			ft_error("Invalid map");
-		if ((i = ft_strlen(tmp->content)) > len)
-				len = i;
+		if (i > len)
+		{
+			i = ft_strlen(tmp->content);
+			len = i;
+		}
 		tmp = tmp->next;
 	}
 	return (len);
@@ -131,9 +134,9 @@ void	get_map(t_data *data, int len)
 		while (tmp->content[j])
 		{
 			c = tmp->content[j];
-			if (c != ' ' && c != '1' && c != '0' && c != 'S' && c != 'N' && 
-				c != 'W' && c != 'E' && c != 9)
-				ft_error("there's a letter either than '1' '0' 'S' 'N' 'W' 'E'");
+			if (c != ' ' && c != '1' && c != '0' && c != 'S' && c != 'N'
+				&& c != 'W' && c != 'E' && c != 9)
+				ft_error("'1' '0' 'S' 'N' 'W' 'E'");
 			cont_texture(data, c);
 			j++;
 		}
