@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/24 12:03:56 by shilal            #+#    #+#             */
+/*   Updated: 2023/07/24 12:06:33 by shilal           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -32,7 +44,6 @@ typedef struct s_check
 	int			t_ea;
 }				t_check;
 
-
 typedef struct s_data
 {
 	t_txtur		*txtur;
@@ -50,18 +61,18 @@ typedef struct s_data
 int		check_file_format(char *file_name, char *ext);
 int		parser(t_data *dataa, char *file_name);
 void	texture_error(char *chr, char **s);
-void	get_map(t_data *data, int len);
 void	check_texture(t_data *data);
 void	check_map(t_data *data);
+void	get_map(t_data *data);
 
 // Utils parsing :
 void	cont_texture(t_data *data, char c);
 int		get_the_tall_line(t_data *data);
 char	*my_strdup(char *s, int len);
 void	ft_error(char *error_msg);
-int		my_lstsize(t_list *lst);
-void	double_free(char **s);
 t_list	*skp_utils(t_list *lst);
+char	**get_texture(char *s);
+void	double_free(char **s);
 char	*is_dgit(char *s);
 
 #endif

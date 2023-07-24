@@ -6,11 +6,27 @@
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 17:26:42 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/21 15:16:09 by shilal           ###   ########.fr       */
+/*   Updated: 2023/07/24 12:05:48 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+t_list	*skp_utils(t_list *lst)
+{
+	int	i;
+
+	i = 1;
+	while (lst->next)
+	{
+		if (i > 6 && lst->content[0])
+			break ;
+		if (lst->content[0])
+			i++;
+		lst = lst->next;
+	}
+	return (lst);
+}
 
 int	check_file_format(char *file_name, char *ext)
 {

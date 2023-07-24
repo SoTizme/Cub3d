@@ -6,7 +6,7 @@
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 14:42:32 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/21 14:58:37 by shilal           ###   ########.fr       */
+/*   Updated: 2023/07/24 12:03:24 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	check_the_end(char *s, t_data *data, int j)
 
 	i = 0;
 	len = data->x;
-	if (j == 0 || j == (data->y - 2))
+	if (j == 0 || j == (data->y - 1))
 	{
 		while (i <= --len)
 		{
@@ -27,14 +27,17 @@ void	check_the_end(char *s, t_data *data, int j)
 				ft_error("Close map");
 		}
 	}
-	while (i <= --len)
+	else
 	{
-		while (s[len] == ' ' && len >= 0)
-			len--;
-		if (len >= 0 && s[len] == '1')
-			break ;
-		else
-			ft_error("Close map");
+		while (i <= --len)
+		{
+			while (s[len] == ' ' && len >= 0)
+				len--;
+			if (len >= 0 && s[len] == '1')
+				break ;
+			else
+				ft_error("Close map");
+		}
 	}
 }
 
@@ -70,7 +73,7 @@ void	check_the_middle(t_data *data, int i, int j)
 	{
 		if (data->map[i][j] == ' ')
 		{
-			if (the_middle(data->map, j, i, data->y - 2) == 0)
+			if (the_middle(data->map, j, i, data->y - 1) == 0)
 				ft_error("Close your map");
 		}
 		j++;
@@ -107,10 +110,10 @@ void	check_map(t_data *data)
 	int		i;
 
 	i = 0;
-	data->y = (my_lstsize(data->s_map));
+	data->y = ft_lstsize(skp_utils(data->s_map));
 	data->map = (char **)malloc((data->y + 1) * sizeof(char *));
 	data->x = get_the_tall_line(data);
-	get_map(data, data->x);
+	get_map(data);
 	i = data->check->t_ea + data->check->t_no + data->check->t_so;
 	if ((i + data->check->t_we) != 5)
 		ft_error("The position of player missing or is double in the map");

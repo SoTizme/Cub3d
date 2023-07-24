@@ -6,56 +6,11 @@
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:31:54 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/21 15:14:54 by shilal           ###   ########.fr       */
+/*   Updated: 2023/07/24 12:06:46 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-t_list	*skp_utils(t_list *lst)
-{
-	int	i;
-
-	i = 1;
-	while (lst->next)
-	{
-		if (i > 6 && lst->content[0])
-			break ;
-		if (lst->content[0])
-			i++;
-		lst = lst->next;
-	}
-	return (lst);
-}
-
-int	my_lstsize(t_list *lst)
-{
-	int	i;
-	int	j;
-
-	if (!lst)
-		return (0);
-	i = 1;
-	j = 1;
-	while (lst)
-	{
-		if (i > 6 && lst->content[0])
-			break ;
-		if (lst->content[0])
-			i++;
-		j++;
-		lst = lst->next;
-	}
-	i = 1;
-	while (lst)
-	{
-		i++;
-		if (!lst->content[0])
-			ft_error("You have a newline in your map");
-		lst = lst->next;
-	}
-	return (i);
-}
 
 char	*my_strdup(char *s, int len)
 {
@@ -66,8 +21,6 @@ char	*my_strdup(char *s, int len)
 	str = malloc(len + 1);
 	while (s[++i])
 		str[i] = s[i];
-	if (i == -1)
-		ft_error("You have a newline in your map");
 	while (i < len)
 	{
 		str[i] = ' ';
@@ -86,15 +39,14 @@ int	get_the_tall_line(t_data *data)
 	i = 0;
 	len = 0;
 	tmp = skp_utils(data->s_map);
+	len = ft_strlen(tmp->content);
 	while (tmp)
 	{
 		if (!tmp->content[0])
 			ft_error("Invalid map");
-		if (i > len)
-		{
-			i = ft_strlen(tmp->content);
+		i = ft_strlen(tmp->content);
+		if (len < i)
 			len = i;
-		}
 		tmp = tmp->next;
 	}
 	return (len);
@@ -119,7 +71,7 @@ void	cont_texture(t_data *data, char c)
 		return ;
 }
 
-void	get_map(t_data *data, int len)
+void	get_map(t_data *data)
 {
 	t_list	*tmp;
 	int		i;
@@ -140,8 +92,32 @@ void	get_map(t_data *data, int len)
 			cont_texture(data, c);
 			j++;
 		}
-		data->map[++i] = my_strdup(tmp->content, len);
+		data->map[++i] = my_strdup(tmp->content, data->x);
 		tmp = tmp->next;
 	}
 	data->map[i + 1] = NULL;
+}
+
+char	**get_texture(char *s)
+{
+	char	**str;
+	int		i;
+	int		j;
+
+	str = (char **)malloc(3 * sizeof(char *));
+	i = 0;
+	j = -1;
+	str[0] = malloc(3);
+	while (j < 2 && s[i])
+	{
+		if (s[i] != ' ')
+			str[0][++j] = s[i];
+		i++;
+	}
+	str[0][j] = '\0';
+	while (s[i] && s[i] == ' ')
+		i++;
+	str[1] = ft_strdup(s + i);
+	str[2] = NULL;
+	return (str);
 }

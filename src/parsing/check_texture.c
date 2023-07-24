@@ -6,7 +6,7 @@
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 15:50:51 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/21 15:16:27 by shilal           ###   ########.fr       */
+/*   Updated: 2023/07/24 12:04:46 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,30 +84,6 @@ void	add_textur(t_data *data, char *s, char *chr)
 		data->txtur->ea = ft_strdup(s);
 		data->check->t_ea++;
 	}
-}
-
-char	**get_texture(char *s)
-{
-	char	**str;
-	int		i;
-	int		j;
-
-	str = (char **)malloc(3 * sizeof(char *));
-	i = 0;
-	j = -1;
-	str[0] = malloc(3);
-	while (j < 2 && s[i])
-	{
-		if (s[i] != ' ')
-			str[0][++j] = s[i];
-		i++;
-	}
-	str[0][j] = '\0';
-	while (s[i] && s[i] == ' ')
-		i++;
-	str[1] = ft_strdup(s + i);
-	str[2] = NULL;
-	return (str);
 }
 
 void	texture(char *line, t_data *data)
