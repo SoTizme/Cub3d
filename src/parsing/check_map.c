@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 14:42:32 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/25 10:45:47 by shilal           ###   ########.fr       */
+/*   Updated: 2023/07/25 12:15:48 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	check_the_end(char *s, t_data *data, int j)
 	int	len;
 
 	i = 0;
-	len = data->x;
-	if (j == 0 || j == (data->y - 1))
+	len = data->width;
+	if (j == 0 || j == (data->height - 1))
 	{
 		while (i <= --len)
 		{
@@ -73,7 +73,7 @@ void	check_the_middle(t_data *data, int i, int j)
 	{
 		if (data->map[i][j] == ' ')
 		{
-			if (the_middle(data->map, j, i, data->y - 1) == 0)
+			if (the_middle(data->map, j, i, data->height - 1) == 0)
 				ft_error("Close your map");
 		}
 		j++;
@@ -110,11 +110,11 @@ void	check_map(t_data *data)
 	int		i;
 
 	i = 0;
-	data->y = ft_lstsize(skp_utils(data->s_map));
-	if (data->y == 1)
+	data->height = ft_lstsize(skp_utils(data->s_map));
+	if (data->height == 1)
 		ft_error("Map missing");
-	data->map = (char **)malloc((data->y + 1) * sizeof(char *));
-	data->x = get_the_tall_line(data);
+	data->map = (char **)malloc((data->height + 1) * sizeof(char *));
+	data->width = get_the_tall_line(data);
 	get_map(data);
 	i = data->check->t_ea + data->check->t_no + data->check->t_so;
 	if ((i + data->check->t_we) != 5)

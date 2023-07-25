@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:31:54 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/25 10:54:06 by shilal           ###   ########.fr       */
+/*   Updated: 2023/07/25 12:15:32 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	get_map(t_data *data)
 			cont_texture(data, c);
 			j++;
 		}
-		data->map[++i] = my_strdup(tmp->content, data->x);
+		data->map[++i] = my_strdup(tmp->content, data->width);
 		tmp = tmp->next;
 	}
 	data->map[i + 1] = NULL;

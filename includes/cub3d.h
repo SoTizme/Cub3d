@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 12:03:56 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/25 11:10:17 by shilal           ###   ########.fr       */
+/*   Updated: 2023/07/25 12:35:56 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,70 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <mlx.h>
+# include <math.h>
 # include <errno.h>
 
+# define BLUE 0x0000FF
+# define RED 0xFF0000
+# define YELLOW 0xF0FF00
+
+# define UP 13
+# define LEFT 0
+# define DOWN 1
+# define RIGHT 2
+# define R_LOOK 124
+# define L_LOOK 123
+# define ESC 53
+# define PI 3.14159265359
+# define M_SPEED 1
+# define R_SPEED 0.066
+# define NO 0
+# define EA 1.57
+# define SO 3.14
+# define WE 4.72
+
 // structs :
+
+typedef struct s_rect
+{
+	int	x;
+	int	y;
+	int	width;
+	int	height;
+	int	color;
+}	t_rect;
+
+typedef struct s_line
+{
+	int	x1;
+	int	y1;
+	int	x2;
+	int	y2;
+	int	color;
+}	t_line;
+
+typedef struct s_distence
+{
+	int	dis;
+	int	dx;
+	int	dy;
+	int	sx;
+	int	sy;
+	int	color;
+}	t_distence;
+
+typedef struct s_player
+{
+	float		x;
+	float		y;
+	int			v_walk;
+	int			h_walk;
+	int			turn;
+	// int			s_rotat;
+	int			fov;
+}	t_player;
+
+// parser 
 
 typedef struct s_txtur
 {
@@ -50,10 +111,15 @@ typedef struct s_data
 	t_list		*s_map;
 	char		**map;
 	t_check		*check;
-	int			y;
-	int			x;
+	void		*mlx;
+	void		*win;
 	int			px;
 	int			py;
+	int			width;
+	int			height;
+	float		angel;
+	t_player	player;
+	t_line		line;
 }				t_data;
 
 // Parsing :
@@ -74,5 +140,28 @@ t_list	*skp_utils(t_list *lst);
 char	**get_texture(char *s);
 void	double_free(char **s);
 char	*is_dgit(char *s);
+
+// render function :
+
+void	init_line(t_data *data, int dx, int dy, int color);
+void	render_rect(t_data *data, t_rect rect);
+void	render_line(t_data *data, t_line line);
+void	draw_map2d(t_data *data);
+void	draw_player(t_data *data);
+
+// move function :
+
+void	move_up(t_data *data);
+void	move_down(t_data *data);
+void	move_left(t_data *data);
+void	move_right(t_data *data);
+
+// check part : 
+
+int		has_wall(t_data *data, float x, float y);
+
+// Displaying
+
+void	display(t_data *data);
 
 #endif
