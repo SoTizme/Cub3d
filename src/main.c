@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 15:51:28 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/25 12:37:57 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/07/25 13:37:15 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,22 @@ char	*is_dgit(char *s)
 
 void	init_player(t_data *data)
 {
-	data->player.x = data->px * 32 + 12;
-	data->player.y = data->py * 32 + 12;
+	data->width *= SIZE;
+	data->height *= SIZE;
+	data->player.x = data->px * SIZE + 12;
+	data->player.y = data->py * SIZE + 12;
+}
+
+void    get_angel(t_data *data, int i, int j)
+{
+    if (data->map[i][j] == 'N')
+        data->angel = NO;
+    else if (data->map[i][j] == 'S')
+        data->angel = SO;
+    else if (data->map[i][j] == 'E')
+        data->angel = EA;
+    else if (data->map[i][j] == 'W')
+        data->angel = WE;
 }
 
 int	main(int ac, char **av)
@@ -47,19 +61,17 @@ int	main(int ac, char **av)
 	t_txtur	t;
 	t_check	check;
 
+	if (ac != 2)
+		ft_error("You have more/less 2 argument");
 	data = (t_data){0};
 	t = (t_txtur){0};
 	check = (t_check){0};
-	if (ac != 2)
-		ft_error("You have more/less 2 argument");
 	t.c = (int *)malloc(3 * sizeof(int));
 	t.f = (int *)malloc(3 * sizeof(int));
 	data.txtur = &t;
 	data.check = &check;
 	parser(&data, av[1]);
-	data.width *= 32;
-	data.height *= 32;
-	data.angel = EA;
+	get_angel(&data, data.py, data.px);
 	init_player(&data);
 	display(&data);
 	system("leaks cub3d");

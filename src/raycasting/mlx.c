@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 17:23:11 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/07/25 12:36:04 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/07/25 13:38:01 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ int	has_wall(t_data *data, float x, float y)
 
 	if (x < 0 || x > data->width || y < 0 || y > data->height)
 		return (1);
-	fx = floor((data->player.x + 4) / 32);
-	fy = floor((data->player.y + 4) / 32);
-	fx2 = floor(x / 32);
-	fy2 = floor(y / 32);
+	fx = floor((data->player.x + 4) / SIZE);
+	fy = floor((data->player.y + 4) / SIZE);
+	fx2 = floor(x / SIZE);
+	fy2 = floor(y / SIZE);
 	if (data->map[fy][fx] == '1' || data->map[fy2][fx2] == '1'
 		|| data->map[fy2][fx] == '1' || data->map[fy][fx2] == '1')
 		return (1);
@@ -174,12 +174,12 @@ void	draw_map2d(t_data *data)
 		while (data->map[i][++j])
 		{
 			if (data->map[i][j] == '1')
-				render_rect(data, (t_rect){x, y, 32, 32, YELLOW});
+				render_rect(data, (t_rect){x, y, SIZE, SIZE, YELLOW});
 			else
-				render_rect(data, (t_rect){x, y, 32, 32, BLUE});
-			x += 32;
+				render_rect(data, (t_rect){x, y, SIZE, SIZE, BLUE});
+			x += SIZE;
 		}
-		y += 32;
+		y += SIZE;
 	}
 }
 
