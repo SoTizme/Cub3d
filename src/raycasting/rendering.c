@@ -6,11 +6,19 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 13:18:36 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/07/25 12:31:40 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/07/25 15:31:08 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+void	drawing(t_data *data)
+{
+	draw_map2d(data);
+	draw_player(data);
+	init_line(data, RED);
+	render_line(data, data->line);
+}
 
 t_distence	init_distence(t_line line)
 {

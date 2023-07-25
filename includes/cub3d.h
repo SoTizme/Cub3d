@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 12:03:56 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/25 13:36:28 by shilal           ###   ########.fr       */
+/*   Updated: 2023/07/25 18:10:15 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 # define RED 0xFF0000
 # define YELLOW 0xF0FF00
 
+# define TILE_SIZE 32
 # define UP 13
-# define SIZE 32
 # define LEFT 0
 # define DOWN 1
 # define RIGHT 2
@@ -36,12 +36,13 @@
 # define L_LOOK 123
 # define ESC 53
 # define PI 3.14159265359
-# define M_SPEED 1
+# define M_SPEED 3
 # define R_SPEED 0.066
 # define NO 0
 # define EA 1.57
 # define SO 3.14
 # define WE 4.72
+# define STRIP_WIDTH 1
 
 // structs :
 
@@ -77,12 +78,27 @@ typedef struct s_player
 {
 	float		x;
 	float		y;
+	int			dx;
+	int			dy;
 	int			v_walk;
 	int			h_walk;
 	int			turn;
-	// int			s_rotat;
 	int			fov;
 }	t_player;
+
+typedef struct s_ray
+{
+	float		x;
+	float		y;
+	float		angel;
+	float		dist;
+	int			is_ver;
+	int			up;
+	int			down;
+	int			left;
+	int			right;
+	int			content;
+}	t_ray;
 
 // parser 
 
@@ -118,9 +134,11 @@ typedef struct s_data
 	int			py;
 	int			width;
 	int			height;
+	int			n_rays;
 	float		angel;
 	t_player	player;
 	t_line		line;
+	t_ray		*rays;
 }				t_data;
 
 // Parsing :
@@ -144,11 +162,13 @@ char	*is_dgit(char *s);
 
 // render function :
 
-void	init_line(t_data *data, int dx, int dy, int color);
+// void	init_line(t_data *data, int dx, int dy, int color);
+void	init_line(t_data *data, int color);
 void	render_rect(t_data *data, t_rect rect);
 void	render_line(t_data *data, t_line line);
 void	draw_map2d(t_data *data);
 void	draw_player(t_data *data);
+void	drawing(t_data *data);
 
 // move function :
 

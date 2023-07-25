@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 15:51:28 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/25 13:37:15 by shilal           ###   ########.fr       */
+/*   Updated: 2023/07/25 18:04:36 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,24 @@ char	*is_dgit(char *s)
 
 void	init_player(t_data *data)
 {
-	data->width *= SIZE;
-	data->height *= SIZE;
-	data->player.x = data->px * SIZE + 12;
-	data->player.y = data->py * SIZE + 12;
+	data->width *= TILE_SIZE;
+	data->height *= TILE_SIZE;
+	data->player.x = data->px * TILE_SIZE + 12;
+	data->player.y = data->py * TILE_SIZE + 12;
+	data->player.fov = 60 * (PI / 180);
+	data->n_rays *= data->width / STRIP_WIDTH;
 }
 
-void    get_angel(t_data *data, int i, int j)
+void	get_angel(t_data *data, int i, int j)
 {
-    if (data->map[i][j] == 'N')
-        data->angel = NO;
-    else if (data->map[i][j] == 'S')
-        data->angel = SO;
-    else if (data->map[i][j] == 'E')
-        data->angel = EA;
-    else if (data->map[i][j] == 'W')
-        data->angel = WE;
+	if (data->map[i][j] == 'N')
+		data->angel = NO;
+	else if (data->map[i][j] == 'S')
+		data->angel = SO;
+	else if (data->map[i][j] == 'E')
+		data->angel = EA;
+	else if (data->map[i][j] == 'W')
+		data->angel = WE;
 }
 
 int	main(int ac, char **av)
