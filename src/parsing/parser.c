@@ -6,7 +6,7 @@
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 17:26:42 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/24 12:05:48 by shilal           ###   ########.fr       */
+/*   Updated: 2023/07/25 11:10:41 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	get_position(t_data *data)
 			if (data->map[i][j] == 'N' || data->map[i][j] == 'W' ||
 				data->map[i][j] == 'S' || data->map[i][j] == 'E')
 			{
-				data->x_player = j;
-				data->y_player = i;
+				data->px = j;
+				data->py = i;
 			}
 		}
 	}

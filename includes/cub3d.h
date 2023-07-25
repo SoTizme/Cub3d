@@ -6,7 +6,7 @@
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 12:03:56 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/24 12:06:33 by shilal           ###   ########.fr       */
+/*   Updated: 2023/07/25 11:10:17 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ typedef struct s_data
 	t_check		*check;
 	int			y;
 	int			x;
-	int			y_player;
-	int			x_player;
+	int			px;
+	int			py;
 }				t_data;
 
 // Parsing :
