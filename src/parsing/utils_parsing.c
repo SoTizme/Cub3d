@@ -6,7 +6,7 @@
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:31:54 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/24 12:06:46 by shilal           ###   ########.fr       */
+/*   Updated: 2023/07/25 10:54:06 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	get_map(t_data *data)
 			c = tmp->content[j];
 			if (c != ' ' && c != '1' && c != '0' && c != 'S' && c != 'N'
 				&& c != 'W' && c != 'E' && c != 9)
-				ft_error("'1' '0' 'S' 'N' 'W' 'E'");
+				ft_error("Ther's an  error in your map");
 			cont_texture(data, c);
 			j++;
 		}

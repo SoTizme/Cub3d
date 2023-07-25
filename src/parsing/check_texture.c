@@ -6,7 +6,7 @@
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 15:50:51 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/24 12:04:46 by shilal           ###   ########.fr       */
+/*   Updated: 2023/07/25 10:49:04 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	texture(char *line, t_data *data)
 				return (double_free(l));
 			}
 			else
-				ft_error("Check texture format .xpm");
+				ft_error("Check if texture is correct");
 		}
 		else
 			texture_error(l[0], l);

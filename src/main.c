@@ -6,7 +6,7 @@
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 15:51:28 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/21 15:02:48 by shilal           ###   ########.fr       */
+/*   Updated: 2023/07/25 10:40:57 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ int	main(int ac, char **av)
 	data = (t_data){0};
 	t = (t_txtur){0};
 	check = (t_check){0};
+	if (ac != 2)
+		ft_error("You have more/less 2 argument");
 	t.c = (int *)malloc(3 * sizeof(int));
 	t.f = (int *)malloc(3 * sizeof(int));
 	data.txtur = &t;
 	data.check = &check;
-	if (ac != 2)
-		ft_error("You have more/less 2 argument");
 	parser(&data, av[1]);
 	system("leaks cub3d");
 }

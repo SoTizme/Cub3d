@@ -6,7 +6,7 @@
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 14:42:32 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/24 12:03:24 by shilal           ###   ########.fr       */
+/*   Updated: 2023/07/25 10:45:47 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ void	check_map(t_data *data)
 
 	i = 0;
 	data->y = ft_lstsize(skp_utils(data->s_map));
+	if (data->y == 1)
+		ft_error("Map missing");
 	data->map = (char **)malloc((data->y + 1) * sizeof(char *));
 	data->x = get_the_tall_line(data);
 	get_map(data);
