@@ -6,7 +6,7 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 15:51:28 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/25 18:04:36 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/07/28 10:05:41 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,22 @@ void	init_player(t_data *data)
 {
 	data->width *= TILE_SIZE;
 	data->height *= TILE_SIZE;
-	data->player.x = data->px * TILE_SIZE + 12;
-	data->player.y = data->py * TILE_SIZE + 12;
-	data->player.fov = 60 * (PI / 180);
-	data->n_rays *= data->width / STRIP_WIDTH;
+	data->player.x = data->px * TILE_SIZE + (TILE_SIZE / 2);
+	data->player.y = data->py * TILE_SIZE + (TILE_SIZE / 2);
+	data->player.fov = 1.04719755;
+	data->n_rays = data->width / STRIP_WIDTH;
 }
 
 void	get_angel(t_data *data, int i, int j)
 {
 	if (data->map[i][j] == 'N')
-		data->angel = NO;
+		data->angle = NO;
 	else if (data->map[i][j] == 'S')
-		data->angel = SO;
+		data->angle = SO;
 	else if (data->map[i][j] == 'E')
-		data->angel = EA;
+		data->angle = EA;
 	else if (data->map[i][j] == 'W')
-		data->angel = WE;
+		data->angle = WE;
 }
 
 int	main(int ac, char **av)

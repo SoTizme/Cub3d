@@ -6,7 +6,7 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 17:23:11 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/07/25 16:17:43 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/07/28 10:32:31 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	ft_close(void)
 
 void	look(t_data *data)
 {
-	data->angel += data->player.turn * R_SPEED;
-	data->player.dx = data->player.x + cos(data->angel) * 30 + 4;
-	data->player.dy = data->player.y + sin(data->angel) * 30 + 4;
+	data->angle += data->player.turn * R_SPEED;
+	data->player.dx = data->player.x + cos(data->angle) * 30;
+	data->player.dy = data->player.y + sin(data->angle) * 30;
 	drawing(data);
 }
 
@@ -35,10 +35,10 @@ int	has_wall(t_data *data, float x, float y)
 
 	if (x < 0 || x > data->width || y < 0 || y > data->height)
 		return (1);
-	fx = floor((data->player.x + 4) / 32);
-	fy = floor((data->player.y + 4) / 32);
-	fx2 = floor(x / 32);
-	fy2 = floor(y / 32);
+	fx = floor((data->player.x) / TILE_SIZE);
+	fy = floor((data->player.y) / TILE_SIZE);
+	fx2 = floor(x / TILE_SIZE);
+	fy2 = floor(y / TILE_SIZE);
 	if (data->map[fy][fx] == '1' || data->map[fy2][fx2] == '1'
 		|| data->map[fy2][fx] == '1' || data->map[fy][fx2] == '1')
 		return (1);
@@ -52,16 +52,16 @@ void	move_ver(t_data *data)
 	float	y;
 
 	move_step = data->player.v_walk * M_SPEED;
-	data->angel += data->player.turn * R_SPEED;
-	x = data->player.x + cos(data->angel) * move_step;
-	y = data->player.y + sin(data->angel) * move_step;
-	if (!has_wall(data, x + 4, y + 4))
+	data->angle += data->player.turn * R_SPEED;
+	x = data->player.x + cos(data->angle) * move_step;
+	y = data->player.y + sin(data->angle) * move_step;
+	if (!has_wall(data, x, y))
 	{
 		data->player.x = x;
 		data->player.y = y;
 	}
-	data->player.dx = data->player.x + cos(data->angel) * 30 + 4;
-	data->player.dy = data->player.y + sin(data->angel) * 30 + 4;
+	data->player.dx = data->player.x + cos(data->angle) * 30;
+	data->player.dy = data->player.y + sin(data->angle) * 30;
 	drawing(data);
 }
 
@@ -72,33 +72,33 @@ void	move_hor(t_data *data)
 	float	y;
 
 	move_step = data->player.h_walk * M_SPEED;
-	data->angel += data->player.turn * R_SPEED;
-	x = data->player.x + cos(data->angel + EA) * move_step;
-	y = data->player.y + sin(data->angel + EA) * move_step;
-	if (!has_wall(data, x + 4, y + 4))
+	data->angle += data->player.turn * R_SPEED;
+	x = data->player.x + cos(data->angle + EA) * move_step;
+	y = data->player.y + sin(data->angle + EA) * move_step;
+	if (!has_wall(data, x, y))
 	{
 		data->player.x = x;
 		data->player.y = y;
 	}
-	data->player.dx = data->player.x + cos(data->angel) * 30 + 4;
-	data->player.dy = data->player.y + sin(data->angel) * 30 + 4;
+	data->player.dx = data->player.x + cos(data->angle) * 30;
+	data->player.dy = data->player.y + sin(data->angle) * 30;
 	drawing(data);
 }
 
 void	move_player(t_data *data)
 {
-	if (data->player.v_walk == 1)
-		move_up(data);
-	else if (data->player.v_walk == -1)
-		move_down(data);
-	else if (data->player.h_walk == 1)
-		move_right(data);
-	else if (data->player.h_walk == -1)
-		move_left(data);
-	// if (data->player.v_walk    != 0)
-	// 	move_ver(data);
-	// else if (data->player.h_walk != 0)
-	// 	move_hor(data);
+	// if (data->player.v_walk == 1)
+	// 	move_up(data);
+	// else if (data->player.v_walk == -1)
+	// 	move_down(data);
+	// else if (data->player.h_walk == 1)
+	// 	move_right(data);
+	// else if (data->player.h_walk == -1)
+	// 	move_left(data);
+	if (data->player.v_walk != 0)
+		move_ver(data);
+	else if (data->player.h_walk != 0)
+		move_hor(data);
 	else
 	{
 		if (data->player.turn != 0)
@@ -158,12 +158,12 @@ void	draw_map2d(t_data *data)
 		while (data->map[i][++j])
 		{
 			if (data->map[i][j] == '1')
-				render_rect(data, (t_rect){x, y, 32, 32, YELLOW});
+				render_rect(data, (t_rect){x, y, TILE_SIZE, TILE_SIZE, YELLOW});
 			else
-				render_rect(data, (t_rect){x, y, 32, 32, BLUE});
-			x += 32;
+				render_rect(data, (t_rect){x, y, TILE_SIZE, TILE_SIZE, BLUE});
+			x += TILE_SIZE;
 		}
-		y += 32;
+		y += TILE_SIZE;
 	}
 }
 
@@ -172,10 +172,11 @@ void	draw_player(t_data *d)
 	int	x;
 	int	y;
 
-	x = d->player.x;
-	y = d->player.y;
+	x = d->player.x - 4;
+	y = d->player.y - 4;
 	render_rect(d, (t_rect){x, y, 8, 8, RED});
 }
+
 
 int	game(t_data *data)
 {
@@ -188,8 +189,8 @@ int	game(t_data *data)
 
 void	display(t_data *data)
 {
-	data->player.dx = data->player.x + cos(data->angel) * 30 + 4;
-	data->player.dy = data->player.y + sin(data->angel) * 30 + 4;
+	data->player.dx = data->player.x + cos(data->angle) * 30;
+	data->player.dy = data->player.y + sin(data->angle) * 30;
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, 1920, 1080, "cub3d");
 	drawing(data);

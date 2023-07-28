@@ -6,7 +6,7 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 12:03:56 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/25 18:10:15 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/07/28 18:59:57 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,14 @@
 # include <mlx.h>
 # include <math.h>
 # include <errno.h>
+#include <limits.h>
+
+// COLORS
 
 # define BLUE 0x0000FF
 # define RED 0xFF0000
 # define YELLOW 0xF0FF00
 
-# define TILE_SIZE 32
 # define UP 13
 # define LEFT 0
 # define DOWN 1
@@ -35,13 +37,17 @@
 # define R_LOOK 124
 # define L_LOOK 123
 # define ESC 53
+
 # define PI 3.14159265359
 # define M_SPEED 3
 # define R_SPEED 0.066
+# define FOV 1.0471975511965976
+
 # define NO 0
 # define EA 1.57
 # define SO 3.14
 # define WE 4.72
+# define TILE_SIZE 32
 # define STRIP_WIDTH 1
 
 // structs :
@@ -83,14 +89,14 @@ typedef struct s_player
 	int			v_walk;
 	int			h_walk;
 	int			turn;
-	int			fov;
+	float			fov;
 }	t_player;
 
 typedef struct s_ray
 {
 	float		x;
 	float		y;
-	float		angel;
+	float		angle;
 	float		dist;
 	int			is_ver;
 	int			up;
@@ -99,6 +105,14 @@ typedef struct s_ray
 	int			right;
 	int			content;
 }	t_ray;
+
+typedef struct s_ray_interface
+{
+	int	up;
+	int	down;
+	int	left;
+	int	right;
+}	t_ray_interface;
 
 // parser 
 
@@ -135,7 +149,7 @@ typedef struct s_data
 	int			width;
 	int			height;
 	int			n_rays;
-	float		angel;
+	float		angle;
 	t_player	player;
 	t_line		line;
 	t_ray		*rays;
@@ -184,5 +198,7 @@ int		has_wall(t_data *data, float x, float y);
 // Displaying
 
 void	display(t_data *data);
+void	cast_rays(t_data *data);
+
 
 #endif

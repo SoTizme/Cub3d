@@ -4,7 +4,7 @@ SRCS = src/main.c
 
 PFILES = parser.c check_texture.c errers_pars.c check_map.c utils_parsing.c
 
-RFILES =  mlx.c move.c rendering.c
+RFILES =  mlx.c move.c rendering.c raycasting.c
 
 GTL = get_next_line_utils.c get_next_line.c
 
