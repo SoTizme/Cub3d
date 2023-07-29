@@ -6,7 +6,7 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 13:26:36 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/07/29 11:08:02 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/07/29 12:03:48 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,20 @@ t_ray_interface    init_ray_interface(float angle)
 float dist_between_two_point(float x1, float y1, float x2, float y2)
 {
 	return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
+}
+
+int	has_wall_at(t_data *data, float x, float y)
+{
+	int	fx;
+	int	fy;
+
+	if (x < 0 || x > data->width || y < 0 || y > data->height)
+		return (1);
+	fx = floor(x / TILE_SIZE);
+	fy = floor(y / TILE_SIZE);
+	if (data->map[fy][fx] == '1' || data->map[fy][fx] == ' ')
+		return (1);
+	return (0);
 }
 
 void	cast_one_ray(t_data *data, float angle, int i)
@@ -74,16 +88,13 @@ void	cast_one_ray(t_data *data, float angle, int i)
 	next_y = yintercept;
 	if (r_face.up)
 		next_y--;
-	
-
 	while (1337)
 	{
-		if (has_wall(data, next_x, next_y))
+		if (has_wall_at(data, next_x, next_y))
 		{
 			hor_wall = 1;
 			hor_x_wall = next_x;
 			hor_y_wall = next_y;
-			// render_line(data, (t_line){data->player.x, data->player.y, hor_x_wall, hor_y_wall, RED});
 			break;
 		}
 		else
@@ -122,7 +133,7 @@ void	cast_one_ray(t_data *data, float angle, int i)
 	
 	while (1337)
 	{
-		if (has_wall(data, next_x, next_y))
+		if (has_wall_at(data, next_x, next_y))
 		{
 			ver_wall = 1;
 			ver_x_wall = next_x;
@@ -168,8 +179,6 @@ void	cast_one_ray(t_data *data, float angle, int i)
 void	cast_rays(t_data *data)
 {
 	float	angle;
-	// float	x;
-	// float	y;
 	int		i;
 
 	angle = data->angle - (data->player.fov / 2);
