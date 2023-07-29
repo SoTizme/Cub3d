@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 17:23:11 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/07/29 13:06:33 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/07/29 15:34:31 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,6 @@ void	draw_player(t_data *d)
 	y = d->player.y - 4;
 	render_rect(d, (t_rect){x, y, 8, 8, RED});
 }
-
 
 int	game(t_data *data)
 {

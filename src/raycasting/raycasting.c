@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 13:26:36 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/07/29 15:03:49 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/07/29 15:34:54 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ float	update_angle(float angle)
 	return (angle);
 }
 
-t_intrf    init_intrf(float angle)
+t_intrf	init_intrf(float angle)
 {
     t_intrf r_interface;
 
@@ -49,6 +49,7 @@ int	has_wall_at(t_data *data, float x, float y)
 		return (1);
 	return (0);
 }
+
 t_horz	init_hor(void)
 {
 	t_horz	horz;
@@ -58,6 +59,7 @@ t_horz	init_hor(void)
 	horz.y_wall = 0;
 	return (horz);
 }
+
 t_vert	init_ver(void)
 {
 	t_vert	vert;
@@ -111,6 +113,63 @@ void	h_init_intrs(t_data *data, t_intrs *intrs, t_intrf r_face, float angle)
 	if (r_face.up)
 		intrs->next_y--;
 }
+
+void	horistal(t_data *data, t_intrs *intrs, t_horz *horz)
+{
+	while (1337)
+	{
+		if (has_wall_at(data, intrs->next_x, intrs->next_y))
+		{
+			horz->wall = 1;
+			horz->x_wall = intrs->next_x;
+			horz->y_wall = intrs->next_y;
+			break;
+		}
+		else
+		{
+			intrs->next_x += intrs->x_step;
+			intrs->next_y += intrs->y_step;
+		}
+	}
+}
+
+void	verical(t_data *data, t_intrs *intrs, t_vert *vert)
+{
+	while (1337)
+	{
+		if (has_wall_at(data, intrs->next_x, intrs->next_y))
+		{
+			vert->wall = 1;
+			vert->x_wall = intrs->next_x;
+			vert->y_wall = intrs->next_y;
+			break;
+		}
+		else
+		{
+			intrs->next_x += intrs->x_step;
+			intrs->next_y += intrs->y_step;
+		}
+	}
+}
+
+void	initialition(t_data *data, t_horz *horz, t_vert *vert, int i)
+{
+	if (vert->dist < horz->dist)
+	{
+        data->rays[i].dist = vert->dist;
+        data->rays[i].x = vert->x_wall;
+        data->rays[i].y = vert->y_wall;
+        data->rays[i].is_vert = 1;
+    }
+	else
+	{
+        data->rays[i].dist = horz->dist;
+        data->rays[i].x = horz->x_wall;
+        data->rays[i].y = horz->y_wall;
+        data->rays[i].is_vert = 0;
+    }
+}
+
 void	cast_one_ray(t_data *data, float angle, int i)
 {
     t_intrf		r_face;
@@ -122,58 +181,17 @@ void	cast_one_ray(t_data *data, float angle, int i)
     r_face = init_intrf(angle);
 	horz = init_hor();
 	h_init_intrs(data, &intrs, r_face, angle);
-	while (1337)
-	{
-		if (has_wall_at(data, intrs.next_x, intrs.next_y))
-		{
-			horz.wall = 1;
-			horz.x_wall = intrs.next_x;
-			horz.y_wall = intrs.next_y;
-			break;
-		}
-		else
-		{
-			intrs.next_x += intrs.x_step;
-			intrs.next_y += intrs.y_step;
-		}
-	}
+	horistal(data, &intrs, &horz);
 	vert = init_ver();
 	v_init_intrs(data, &intrs, r_face, angle);
-	while (1337)
-	{
-		if (has_wall_at(data, intrs.next_x, intrs.next_y))
-		{
-			vert.wall = 1;
-			vert.x_wall = intrs.next_x;
-			vert.y_wall = intrs.next_y;
-			break;
-		}
-		else
-		{
-			intrs.next_x += intrs.x_step;
-			intrs.next_y += intrs.y_step;
-		}
-	}
+	verical(data, &intrs, &vert);
 	horz.dist = INT_MAX;
 	if (horz.wall)
 		horz.dist = dist_between_two_point(data->player.x, data->player.y, horz.x_wall, horz.y_wall);
 	vert.dist = INT_MAX;
 	if (vert.wall)
-		vert.dist = dist_between_two_point(data->player.x, data->player.y, vert.x_wall, vert.y_wall); 
-	if (vert.dist < horz.dist)
-	{
-        data->rays[i].dist = vert.dist;
-        data->rays[i].x = vert.x_wall;
-        data->rays[i].y = vert.y_wall;
-        data->rays[i].is_vert = 1;
-    }
-	else
-	{
-        data->rays[i].dist = horz.dist;
-        data->rays[i].x = horz.x_wall;
-        data->rays[i].y = horz.y_wall;
-        data->rays[i].is_vert = 0;
-    }
+		vert.dist = dist_between_two_point(data->player.x, data->player.y, vert.x_wall, vert.y_wall);
+	initialition(data, &horz, &vert, i);
     data->rays[i].angle = angle;
     data->rays[i].down = r_face.down;
     data->rays[i].up = r_face.up;
