@@ -6,7 +6,7 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 13:26:36 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/07/28 21:48:29 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/07/29 11:08:02 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ void	cast_one_ray(t_data *data, float angle, int i)
 	int		ver_wall = 0;
 	float	ver_x_wall = 0;
 	float	ver_y_wall = 0;
-	char	ver_content = '0';
 
 	// find point A
 	xintercept = floor(data->player.x / TILE_SIZE) * TILE_SIZE;
@@ -119,7 +118,7 @@ void	cast_one_ray(t_data *data, float angle, int i)
 	next_x = xintercept;
 	next_y = yintercept;
 	if (r_face.left)
-		next_y--;
+		next_x--;
 	
 	while (1337)
 	{
@@ -128,8 +127,6 @@ void	cast_one_ray(t_data *data, float angle, int i)
 			ver_wall = 1;
 			ver_x_wall = next_x;
 			ver_y_wall = next_y;
-			ver_content = data->map[(int)floor(next_y / TILE_SIZE)][(int)floor(next_x / TILE_SIZE)];
-			// render_line(data, (t_line){data->player.x, data->player.y, ver_x_wall, ver_y_wall, RED});
 			break;
 		}
 		else
@@ -138,8 +135,7 @@ void	cast_one_ray(t_data *data, float angle, int i)
 			next_y += y_step;
 		}
 	}
-	// comp hori and ver
-	
+	// cmp hori and ver
 	int	hor_dist;
 	hor_dist = INT_MAX;
 	if (hor_wall)
@@ -148,18 +144,18 @@ void	cast_one_ray(t_data *data, float angle, int i)
 	ver_dist = INT_MAX;
 	if (ver_wall)
 		ver_dist = dist_between_two_point(data->player.x, data->player.y, ver_x_wall, ver_y_wall); 
-
-	if (ver_dist < hor_dist) {
+	if (ver_dist < hor_dist)
+	{
         data->rays[i].dist = ver_dist;
         data->rays[i].x = ver_x_wall;
         data->rays[i].y = ver_y_wall;
-        data->rays[i].content = ver_content;
         data->rays[i].is_ver = 1;
-    } else {
+    }
+	else
+	{
         data->rays[i].dist = hor_dist;
         data->rays[i].x = hor_x_wall;
         data->rays[i].y = hor_y_wall;
-        // data->rays[i].content = ver_content;
         data->rays[i].is_ver = 0;
     }
     data->rays[i].angle = angle;
@@ -167,7 +163,6 @@ void	cast_one_ray(t_data *data, float angle, int i)
     data->rays[i].up = r_face.up;
     data->rays[i].left = r_face.left;
     data->rays[i].right = r_face.right;
-	 
 }
 
 void	cast_rays(t_data *data)
@@ -178,16 +173,12 @@ void	cast_rays(t_data *data)
 	int		i;
 
 	angle = data->angle - (data->player.fov / 2);
+	data->rays = malloc(sizeof(t_ray) * data->n_rays);
 	i = 0;
-	// while (i < data->n_rays)
-	while (i < 1)
+	while (i < data->n_rays)
 	{
 		cast_one_ray(data, angle, i);
-		// render start
-		// x = data->player.x + cos(angle) * 30;
-		// y = data->player.y + sin(angle) * 30;
-		// render_line(data, (t_line){data->player.x, data->player.y, x, y, RED});
-		// // render end
+		render_line(data, (t_line){data->player.x, data->player.y, data->rays[i].x, data->rays[i].y, RED});
 		angle += data->player.fov / data->n_rays;
 		i++;
 	}
