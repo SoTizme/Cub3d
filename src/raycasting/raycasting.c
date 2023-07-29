@@ -6,7 +6,7 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 13:26:36 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/07/29 12:03:48 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/07/29 15:03:49 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ float	update_angle(float angle)
 	return (angle);
 }
 
-t_ray_interface    init_ray_interface(float angle)
+t_intrf    init_intrf(float angle)
 {
-    t_ray_interface r_interface;
+    t_intrf r_interface;
 
 	r_interface.down = angle > 0 && angle < PI;
     r_interface.up = !r_interface.down;
@@ -49,125 +49,130 @@ int	has_wall_at(t_data *data, float x, float y)
 		return (1);
 	return (0);
 }
-
-void	cast_one_ray(t_data *data, float angle, int i)
+t_horz	init_hor(void)
 {
-    t_ray_interface r_face;
-	float			xintercept;
-	float			yintercept;
-	float			next_x;
-	float			next_y;
-	float			x_step;
-	float			y_step;
-    
-	angle = update_angle(angle);
-    r_face = init_ray_interface(angle);
-	// horizontal
-	
-	int		hor_wall = 0;
-	float	hor_x_wall = 0;
-	float	hor_y_wall = 0;
+	t_horz	horz;
 
-	// find point A
-	yintercept = floor(data->player.y / TILE_SIZE)  * TILE_SIZE;
-	if (r_face.down)
-		yintercept += TILE_SIZE;
-	xintercept = data->player.x + (yintercept - data->player.y) / tan(angle);
+	horz.wall = 0;
+	horz.x_wall = 0;
+	horz.y_wall = 0;
+	return (horz);
+}
+t_vert	init_ver(void)
+{
+	t_vert	vert;
 
-	// horizontal intersection steps
-	y_step = TILE_SIZE;
-	if (r_face.up)
-		y_step *= -1;
-	x_step = y_step / tan(angle);
-	if (r_face.left && x_step > 0)
-		x_step *= -1;
-	if (r_face.right && x_step < 0)
-		x_step *= -1;
-	
-	next_x = xintercept;
-	next_y = yintercept;
-	if (r_face.up)
-		next_y--;
-	while (1337)
-	{
-		if (has_wall_at(data, next_x, next_y))
-		{
-			hor_wall = 1;
-			hor_x_wall = next_x;
-			hor_y_wall = next_y;
-			break;
-		}
-		else
-		{
-			next_x += x_step;
-			next_y += y_step;
-		}
-	}
-	
-	// vertical
-	
-	int		ver_wall = 0;
-	float	ver_x_wall = 0;
-	float	ver_y_wall = 0;
+	vert.wall = 0;
+	vert.x_wall = 0;
+	vert.y_wall = 0;
+	return (vert);
+}
 
-	// find point A
-	xintercept = floor(data->player.x / TILE_SIZE) * TILE_SIZE;
+void	v_init_intrs(t_data *data, t_intrs *intrs, t_intrf r_face, float angle)
+{
+	intrs->x = floor(data->player.x / TILE_SIZE) * TILE_SIZE;
 	if (r_face.right)
-		xintercept += TILE_SIZE;
-	yintercept = data->player.y + (xintercept - data->player.x) * tan(angle);
+		intrs->x += TILE_SIZE;
+	intrs->y = data->player.y + (intrs->x - data->player.x) * tan(angle);
 
 	// vertical intersection steps
-	x_step = TILE_SIZE;
+	intrs->x_step = TILE_SIZE;
 	if (r_face.left)
-		x_step *= -1;
-	y_step = x_step * tan(angle);
-	if (r_face.up && y_step > 0)
-		y_step *= -1;
-	if (r_face.down && y_step < 0)
-		y_step *= -1;
+		intrs->x_step *= -1;
+	intrs->y_step = intrs->x_step * tan(angle);
+	if (r_face.up && intrs->y_step > 0)
+		intrs->y_step *= -1;
+	if (r_face.down && intrs->y_step < 0)
+		intrs->y_step *= -1;
 	
-	next_x = xintercept;
-	next_y = yintercept;
+	intrs->next_x = intrs->x;
+	intrs->next_y = intrs->y;
 	if (r_face.left)
-		next_x--;
+		intrs->next_x--;
+}
+
+void	h_init_intrs(t_data *data, t_intrs *intrs, t_intrf r_face, float angle)
+{
+	intrs->y = floor(data->player.y / TILE_SIZE)  * TILE_SIZE;
+	if (r_face.down)
+		intrs->y += TILE_SIZE;
+	intrs->x = data->player.x + (intrs->y - data->player.y) / tan(angle);
+	intrs->y_step = TILE_SIZE;
+	if (r_face.up)
+		intrs->y_step *= -1;
+	intrs->x_step = intrs->y_step / tan(angle);
+	if (r_face.left && intrs->x_step > 0)
+		intrs->x_step *= -1;
+	if (r_face.right && intrs->x_step < 0)
+		intrs->x_step *= -1;
 	
+	intrs->next_x = intrs->x;
+	intrs->next_y = intrs->y;
+	if (r_face.up)
+		intrs->next_y--;
+}
+void	cast_one_ray(t_data *data, float angle, int i)
+{
+    t_intrf		r_face;
+	t_intrs		intrs;
+	t_horz		horz;
+	t_vert		vert;
+
+	angle = update_angle(angle);
+    r_face = init_intrf(angle);
+	horz = init_hor();
+	h_init_intrs(data, &intrs, r_face, angle);
 	while (1337)
 	{
-		if (has_wall_at(data, next_x, next_y))
+		if (has_wall_at(data, intrs.next_x, intrs.next_y))
 		{
-			ver_wall = 1;
-			ver_x_wall = next_x;
-			ver_y_wall = next_y;
+			horz.wall = 1;
+			horz.x_wall = intrs.next_x;
+			horz.y_wall = intrs.next_y;
 			break;
 		}
 		else
 		{
-			next_x += x_step;
-			next_y += y_step;
+			intrs.next_x += intrs.x_step;
+			intrs.next_y += intrs.y_step;
 		}
 	}
-	// cmp hori and ver
-	int	hor_dist;
-	hor_dist = INT_MAX;
-	if (hor_wall)
-		hor_dist = dist_between_two_point(data->player.x, data->player.y, hor_x_wall, hor_y_wall);
-	int	ver_dist;
-	ver_dist = INT_MAX;
-	if (ver_wall)
-		ver_dist = dist_between_two_point(data->player.x, data->player.y, ver_x_wall, ver_y_wall); 
-	if (ver_dist < hor_dist)
+	vert = init_ver();
+	v_init_intrs(data, &intrs, r_face, angle);
+	while (1337)
 	{
-        data->rays[i].dist = ver_dist;
-        data->rays[i].x = ver_x_wall;
-        data->rays[i].y = ver_y_wall;
-        data->rays[i].is_ver = 1;
+		if (has_wall_at(data, intrs.next_x, intrs.next_y))
+		{
+			vert.wall = 1;
+			vert.x_wall = intrs.next_x;
+			vert.y_wall = intrs.next_y;
+			break;
+		}
+		else
+		{
+			intrs.next_x += intrs.x_step;
+			intrs.next_y += intrs.y_step;
+		}
+	}
+	horz.dist = INT_MAX;
+	if (horz.wall)
+		horz.dist = dist_between_two_point(data->player.x, data->player.y, horz.x_wall, horz.y_wall);
+	vert.dist = INT_MAX;
+	if (vert.wall)
+		vert.dist = dist_between_two_point(data->player.x, data->player.y, vert.x_wall, vert.y_wall); 
+	if (vert.dist < horz.dist)
+	{
+        data->rays[i].dist = vert.dist;
+        data->rays[i].x = vert.x_wall;
+        data->rays[i].y = vert.y_wall;
+        data->rays[i].is_vert = 1;
     }
 	else
 	{
-        data->rays[i].dist = hor_dist;
-        data->rays[i].x = hor_x_wall;
-        data->rays[i].y = hor_y_wall;
-        data->rays[i].is_ver = 0;
+        data->rays[i].dist = horz.dist;
+        data->rays[i].x = horz.x_wall;
+        data->rays[i].y = horz.y_wall;
+        data->rays[i].is_vert = 0;
     }
     data->rays[i].angle = angle;
     data->rays[i].down = r_face.down;

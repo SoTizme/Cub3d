@@ -6,7 +6,7 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 12:03:56 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/28 18:59:57 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/07/29 14:55:38 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@
 
 // structs :
 
+// render struct
+
 typedef struct s_rect
 {
 	int	x;
@@ -70,6 +72,8 @@ typedef struct s_line
 	int	color;
 }	t_line;
 
+// distence struct
+
 typedef struct s_distence
 {
 	int	dis;
@@ -79,6 +83,8 @@ typedef struct s_distence
 	int	sy;
 	int	color;
 }	t_distence;
+
+// player struct
 
 typedef struct s_player
 {
@@ -92,13 +98,15 @@ typedef struct s_player
 	float			fov;
 }	t_player;
 
+// ray struct
+
 typedef struct s_ray
 {
 	float		x;
 	float		y;
 	float		angle;
 	float		dist;
-	int			is_ver;
+	int			is_vert;
 	int			up;
 	int			down;
 	int			left;
@@ -106,13 +114,45 @@ typedef struct s_ray
 	int			content;
 }	t_ray;
 
-typedef struct s_ray_interface
+// ray casting struct
+
+// inter facing
+
+typedef struct s_intrf
 {
 	int	up;
 	int	down;
 	int	left;
 	int	right;
-}	t_ray_interface;
+}	t_intrf;
+
+// inter section
+
+typedef struct s_intrs
+{
+	float	x;
+	float	y;
+	float	next_x;
+	float	next_y;
+	float	x_step;
+	float	y_step;
+}	t_intrs;
+
+typedef struct s_horz
+{
+	int		wall;
+	float	x_wall;
+	float	y_wall;
+	int		dist;
+}	t_horz;
+
+typedef struct s_vert
+{
+	int		wall;
+	float	x_wall;
+	float	y_wall;
+	int		dist;
+}	t_vert;
 
 // parser 
 
