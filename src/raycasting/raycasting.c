@@ -6,7 +6,7 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 13:26:36 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/08/01 09:56:23 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/01 13:18:21 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,17 @@ void	cast_rays(t_data *d)
 	float	angle;
 	int		i;
 
-	angle = d->angle - (d->player.fov / 2);
+	angle = d->angle - (FOV / 2);
 	d->rays = malloc(sizeof(t_ray) * d->n_rays);
 	i = 0;
-	while (i < d->n_rays)
+	// while (i < data->n_rays)
+	while (i < 120)
 	{
 		cast_one_ray(d, angle, i);
 		render_line(d, (t_line){
 			d->player.x, d->player.y, d->rays[i].x, d->rays[i].y, RED
 		});
-		angle += d->player.fov / d->n_rays;
+		angle += FOV / 120;
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 09:42:29 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/08/01 10:00:25 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/01 12:41:55 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ float	update_angle(float angle)
 	angle = remainder(angle, PI * 2);
 	if (angle < 0)
 		angle += PI * 2;
+	if (angle > PI * 2)
+		angle -= PI * 2;
 	return (angle);
 }
 

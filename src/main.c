@@ -6,7 +6,7 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 15:51:28 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/29 18:08:04 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/01 12:50:01 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	init_player(t_data *data)
 	data->height *= TILE_SIZE;
 	data->player.x = data->px * TILE_SIZE + (TILE_SIZE / 2);
 	data->player.y = data->py * TILE_SIZE + (TILE_SIZE / 2);
-	data->player.fov = 1.04719755;
 	data->n_rays = data->width / STRIP_WIDTH;
 }
 
@@ -76,5 +75,4 @@ int	main(int ac, char **av)
 	get_angel(&data, data.py, data.px);
 	init_player(&data);
 	display(&data);
-	system("leaks cub3d");
 }

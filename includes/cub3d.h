@@ -6,7 +6,7 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 12:03:56 by shilal            #+#    #+#             */
-/*   Updated: 2023/08/01 10:45:05 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/01 12:49:30 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # define RED 0xFF0000
 # define YELLOW 0xF0FF00
 
+// keys press
+
 # define UP 13
 # define LEFT 0
 # define DOWN 1
@@ -47,6 +49,7 @@
 # define EA 1.57
 # define SO 3.14
 # define WE 4.72
+
 # define TILE_SIZE 32
 # define STRIP_WIDTH 1
 
@@ -95,7 +98,6 @@ typedef struct s_player
 	int			v_walk;
 	int			h_walk;
 	int			turn;
-	float		fov;
 }	t_player;
 
 // ray struct
