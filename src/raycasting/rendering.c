@@ -6,7 +6,7 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 13:18:36 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/07/29 11:11:32 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/07/29 18:06:29 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 void	drawing(t_data *data)
 {
 	draw_map2d(data);
-	draw_player(data);
 	cast_rays(data);
-	// init_line(data, YELLOW);
-	// render_line(data, data->line);
+	draw_player(data);
+	init_line(data, 0);
+	render_line(data, data->line);
 }
 
 t_distence	init_distence(t_line line)

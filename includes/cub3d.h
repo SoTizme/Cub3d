@@ -6,7 +6,7 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 12:03:56 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/29 14:55:38 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/01 10:45:05 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <mlx.h>
 # include <math.h>
 # include <errno.h>
-#include <limits.h>
+# include <limits.h>
 
 // COLORS
 
@@ -95,7 +95,7 @@ typedef struct s_player
 	int			v_walk;
 	int			h_walk;
 	int			turn;
-	float			fov;
+	float		fov;
 }	t_player;
 
 // ray struct
@@ -226,12 +226,12 @@ void	drawing(t_data *data);
 
 // move function :
 
-void	move_up(t_data *data);
-void	move_down(t_data *data);
-void	move_left(t_data *data);
-void	move_right(t_data *data);
+void	move_player(t_data *data);
+void	move_hor(t_data *data);
+void	move_ver(t_data *data);
+void	look(t_data *data);
 
-// check part : 
+// check part :
 
 int		has_wall(t_data *data, float x, float y);
 
@@ -240,5 +240,20 @@ int		has_wall(t_data *data, float x, float y);
 void	display(t_data *data);
 void	cast_rays(t_data *data);
 
+// raycasting function :
+
+float	update_angle(float angle);
+t_intrf	init_intrf(float angle);
+float	dist_2point(float x1, float y1, float x2, float y2);
+int		has_wall_at(t_data *data, float x, float y);
+void	initialition(t_data *data, t_horz *horz, t_vert *vert, int i);
+
+void	h_init_intrs(t_data *data, t_intrs *intrs, t_intrf r_face, float angle);
+void	horizontal(t_data *data, t_intrs *intrs, t_horz *horz);
+t_horz	init_hor(void);
+
+void	v_init_intrs(t_data *data, t_intrs *intrs, t_intrf r_face, float angle);
+void	verical(t_data *data, t_intrs *intrs, t_vert *vert);
+t_vert	init_ver(void);
 
 #endif
