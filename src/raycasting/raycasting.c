@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 13:26:36 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/08/01 13:18:21 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/02 16:19:07 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,19 @@ void	cast_rays(t_data *d)
 	float	angle;
 	int		i;
 
+	d->n_rays = 120;
 	angle = d->angle - (FOV / 2);
 	d->rays = malloc(sizeof(t_ray) * d->n_rays);
+	d->size = 1920 / d->n_rays;
 	i = 0;
-	// while (i < data->n_rays)
-	while (i < 120)
+	while (i < d->n_rays)
 	{
 		cast_one_ray(d, angle, i);
-		render_line(d, (t_line){
-			d->player.x, d->player.y, d->rays[i].x, d->rays[i].y, RED
-		});
-		angle += FOV / 120;
+		draw_wall(d, i);
+		// render_line(d, (t_line){
+		// 	d->player.x, d->player.y, d->rays[i].x, d->rays[i].y, RED
+		// });
+		angle += FOV / d->n_rays;
 		i++;
 	}
 }

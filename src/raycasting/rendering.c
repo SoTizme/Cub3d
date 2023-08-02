@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 13:18:36 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/07/29 18:06:29 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/02 16:16:37 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	drawing(t_data *data)
 {
-	draw_map2d(data);
+	// draw_map2d(data);
 	cast_rays(data);
-	draw_player(data);
-	init_line(data, 0);
-	render_line(data, data->line);
+	// draw_player(data);
+	// init_line(data, 0);
+	// render_line(data, data->line);
 }
 
 t_distence	init_distence(t_line line)
@@ -71,10 +71,10 @@ void	render_rect(t_data *data, t_rect rect)
 		j = rect.x;
 		while (j < rect.x + rect.width)
 		{
-			if (i != rect.y && j != rect.x)
+			// if (i != rect.y && j != rect.x)
 				mlx_pixel_put(data->mlx, data->win, j++, i, rect.color);
-			else
-				mlx_pixel_put(data->mlx, data->win, j++, i, 0);
+			// else
+			// 	mlx_pixel_put(data->mlx, data->win, j++, i, 0);
 		}
 		i++;
 	}

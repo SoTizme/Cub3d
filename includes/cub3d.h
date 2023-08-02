@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 12:03:56 by shilal            #+#    #+#             */
-/*   Updated: 2023/08/01 12:49:30 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/02 16:12:19 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,20 @@
 # define TILE_SIZE 32
 # define STRIP_WIDTH 1
 
+# define WMAP 1920
+# define HMAP 1080
+
 // structs :
 
 // render struct
+
+typedef struct s_draw
+{
+	int	x;
+	int	y;
+	int	f_height;
+	int	w_height;
+}	t_draw;
 
 typedef struct s_rect
 {
@@ -192,6 +203,7 @@ typedef struct s_data
 	int			height;
 	int			n_rays;
 	float		angle;
+	float		size;
 	t_player	player;
 	t_line		line;
 	t_ray		*rays;
@@ -257,5 +269,7 @@ t_horz	init_hor(void);
 void	v_init_intrs(t_data *data, t_intrs *intrs, t_intrf r_face, float angle);
 void	verical(t_data *data, t_intrs *intrs, t_vert *vert);
 t_vert	init_ver(void);
+
+void	draw_wall(t_data *data, int i);
 
 #endif

@@ -8,11 +8,15 @@ RFILES =  mlx.c move.c rendering.c raycasting.c raycasting_utils.c horiz_raycast
 
 GTL = get_next_line_utils.c get_next_line.c
 
+3D = wall_3d.c
+
 PFILES := $(addprefix src/parsing/, $(PFILES))
 
 RFILES := $(addprefix src/raycasting/, $(RFILES))
 
 GTL := $(addprefix src/get_line/, $(GTL))
+
+3D := $(addprefix src/texture_3d/, $(3D))
 
 RM = rm -f
 CC = cc
@@ -20,9 +24,9 @@ CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
 
 all: $(NAME)
 
-$(NAME) : $(SRCS) $(GTL) $(PFILES) $(RFILES)
+$(NAME) : $(SRCS) $(GTL) $(PFILES) $(RFILES) $(3D)
 	@make -C libft
-	$(CC) $(CFLAGS) libft/libft.a $(SRCS) $(GTL) $(RFILES) $(PFILES) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	$(CC) $(CFLAGS) libft/libft.a $(SRCS) $(GTL) $(3D) $(RFILES) $(PFILES) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 clean:
 	@make clean -C libft
