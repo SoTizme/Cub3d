@@ -6,7 +6,7 @@
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 13:26:36 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/08/03 13:22:18 by shilal           ###   ########.fr       */
+/*   Updated: 2023/08/03 16:24:19 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,19 +65,17 @@ void	cast_rays(t_data *d)
 	float	angle;
 	int		i;
 
-	d->n_rays = 1920;
 	angle = d->angle - (FOV / 2);
-	d->rays = malloc(sizeof(t_ray) * d->n_rays);
-	// d->size = 1920 / d->n_rays;
+	d->rays = malloc(sizeof(t_ray) * WMAP);
 	i = 0;
-	while (i < d->n_rays)
+	while (i <= WMAP)
 	{
 		cast_one_ray(d, angle, i);
 		draw_wall(d, i);
 		// render_line(d, (t_line){
 		// 	d->player.x, d->player.y, d->rays[i].x, d->rays[i].y, RED
 		// });
-		angle += FOV / d->n_rays;
+		angle += FOV / WMAP;
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 12:03:56 by shilal            #+#    #+#             */
-/*   Updated: 2023/08/03 13:21:19 by shilal           ###   ########.fr       */
+/*   Updated: 2023/08/03 16:25:13 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ typedef struct s_horz
 	int		wall;
 	float	x_wall;
 	float	y_wall;
-	int		dist;
+	float	dist;
 }	t_horz;
 
 typedef struct s_vert
@@ -164,7 +164,7 @@ typedef struct s_vert
 	int		wall;
 	float	x_wall;
 	float	y_wall;
-	int		dist;
+	float	dist;
 }	t_vert;
 
 // parser 
@@ -201,7 +201,6 @@ typedef struct s_data
 	int			py;
 	int			width;
 	int			height;
-	int			n_rays;
 	float		angle;
 	t_player	player;
 	t_line		line;
