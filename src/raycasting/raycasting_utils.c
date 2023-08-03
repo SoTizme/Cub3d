@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 09:42:29 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/08/01 12:41:55 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/03 13:36:02 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 
 float	update_angle(float angle)
 {
+	printf("%f\n", angle);
 	angle = remainder(angle, PI * 2);
+	printf("*%f*\n", angle);
 	if (angle < 0)
 		angle += PI * 2;
-	if (angle > PI * 2)
-		angle -= PI * 2;
+	// if (angle > PI * 2)
+	// 	angle -= PI * 2;
+	printf("**%f**\n", angle);
 	return (angle);
 }
 

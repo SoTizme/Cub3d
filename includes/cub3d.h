@@ -6,7 +6,7 @@
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 12:03:56 by shilal            #+#    #+#             */
-/*   Updated: 2023/08/02 16:12:19 by shilal           ###   ########.fr       */
+/*   Updated: 2023/08/03 13:21:19 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@
 # define SO 3.14
 # define WE 4.72
 
-# define TILE_SIZE 32
+# define TILE_SIZE 64
 # define STRIP_WIDTH 1
 
 # define WMAP 1920
@@ -203,7 +203,6 @@ typedef struct s_data
 	int			height;
 	int			n_rays;
 	float		angle;
-	float		size;
 	t_player	player;
 	t_line		line;
 	t_ray		*rays;

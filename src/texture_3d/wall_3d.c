@@ -6,7 +6,7 @@
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 12:06:14 by shilal            #+#    #+#             */
-/*   Updated: 2023/08/02 17:02:28 by shilal           ###   ########.fr       */
+/*   Updated: 2023/08/03 13:19:58 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,15 @@ void	render_3d_map(t_data *data, t_draw *draw)
 
 void	draw_wall(t_data *data, int i)
 {
-	float		ton;
-	int		r;
-	int		a;
-	float		wall_height;
-	float	angle;
+	float	r;
+	float	a;
+	float	wall_height;
+	float	distance;
+	float	correct_d;
 
-	ton = (WMAP / 2) / tan(FOV / 2);
-	angle = data->angle - data->rays[i].angle;
-	angle = update_angle(angle);
-	
-	wall_height = (data->size / (data->rays[i].dist  * cos(angle))) * (WMAP / 2) / tan(FOV / 2);
+	correct_d = data->rays[i].dist * cos(data->rays[i].angle - data->angle);
+	distance  = fabs((WMAP / 2) / tan(FOV / 2));
+	wall_height = (TILE_SIZE / correct_d) * distance;
 	if (wall_height > 1080)
 		wall_height = 1080;
 	r = (HMAP / 2) - (wall_height / 2);
@@ -60,5 +58,3 @@ void	draw_wall(t_data *data, int i)
 	// render_rect(data, (t_rect){i * data->size, r, data->size, wall_height, RED});
 	// render_rect(data, (t_rect){i * data->size, r + wall_height, data->size, a, BLUE});
 }
-
-// data->rays[i].dist * cos(data->rays[i].angle - data->angle
