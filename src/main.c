@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 15:51:28 by shilal            #+#    #+#             */
-/*   Updated: 2023/08/03 16:24:40 by shilal           ###   ########.fr       */
+/*   Updated: 2023/08/01 12:50:01 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	init_player(t_data *data)
 	data->height *= TILE_SIZE;
 	data->player.x = data->px * TILE_SIZE + (TILE_SIZE / 2);
 	data->player.y = data->py * TILE_SIZE + (TILE_SIZE / 2);
-	//data->n_rays = data->width / STRIP_WIDTH;
+	data->n_rays = data->width / STRIP_WIDTH;
 }
 
 void	get_angel(t_data *data, int i, int j)

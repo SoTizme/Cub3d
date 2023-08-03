@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 12:03:56 by shilal            #+#    #+#             */
-/*   Updated: 2023/08/03 16:25:13 by shilal           ###   ########.fr       */
+/*   Updated: 2023/08/03 19:56:38 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@
 
 // COLORS
 
-# define BLUE 0x0000FF
+# define BLUE 0x7eabf2
 # define RED 0xFF0000
 # define YELLOW 0xF0FF00
+# define GREEN 0x4e947e
 
 // keys press
 
@@ -42,7 +43,7 @@
 
 # define PI 3.14159265359
 # define M_SPEED 3
-# define R_SPEED 0.066
+# define R_SPEED 0.016
 # define FOV 1.0471975511965976
 
 # define NO 0
@@ -58,12 +59,21 @@
 
 // structs :
 
+typedef struct    s_img {
+	void    *img;
+	char    *addr;
+	int     bits_per_pixel;
+	int        size_line;
+	int        endian;
+	int        width;
+	int        height;
+}    t_img;
+
 // render struct
 
 typedef struct s_draw
 {
 	int	x;
-	int	y;
 	int	f_height;
 	int	w_height;
 }	t_draw;
@@ -197,10 +207,12 @@ typedef struct s_data
 	t_check		*check;
 	void		*mlx;
 	void		*win;
+	t_img       img;
 	int			px;
 	int			py;
 	int			width;
 	int			height;
+	int			n_rays;
 	float		angle;
 	t_player	player;
 	t_line		line;

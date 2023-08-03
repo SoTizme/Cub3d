@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 13:26:36 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/08/03 16:24:19 by shilal           ###   ########.fr       */
+/*   Updated: 2023/08/03 20:12:52 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,12 @@ void	cast_rays(t_data *d)
 	float	angle;
 	int		i;
 
+	// WMAP = 1920;
 	angle = d->angle - (FOV / 2);
 	d->rays = malloc(sizeof(t_ray) * WMAP);
+	// d->size = 1920 / WMAP;
 	i = 0;
-	while (i <= WMAP)
+	while (i < WMAP)
 	{
 		cast_one_ray(d, angle, i);
 		draw_wall(d, i);

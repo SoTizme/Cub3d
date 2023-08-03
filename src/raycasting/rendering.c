@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 13:18:36 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/08/02 16:16:37 by shilal           ###   ########.fr       */
+/*   Updated: 2023/08/03 18:39:43 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,15 @@
 void	drawing(t_data *data)
 {
 	// draw_map2d(data);
+	void  *img;
+	
+	img = mlx_new_image(data->mlx, WMAP, HMAP);
+	data->img.img = img;
+	data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bits_per_pixel,
+	            &data->img.size_line, &data->img.endian);
 	cast_rays(data);
+	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
+	// mlx_destroy_image(data->mlx, data->img.img);
 	// draw_player(data);
 	// init_line(data, 0);
 	// render_line(data, data->line);
