@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 13:18:36 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/08/03 18:39:43 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/04 14:32:17 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 void	drawing(t_data *data)
 {
-	// draw_map2d(data);
-	void  *img;
-	
+	void	*img;
+
 	img = mlx_new_image(data->mlx, WMAP, HMAP);
 	data->img.img = img;
 	data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bits_per_pixel,
-	            &data->img.size_line, &data->img.endian);
+			&data->img.size_line, &data->img.endian);
 	cast_rays(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
 	// mlx_destroy_image(data->mlx, data->img.img);
@@ -80,7 +79,7 @@ void	render_rect(t_data *data, t_rect rect)
 		while (j < rect.x + rect.width)
 		{
 			// if (i != rect.y && j != rect.x)
-				mlx_pixel_put(data->mlx, data->win, j++, i, rect.color);
+			mlx_pixel_put(data->mlx, data->win, j++, i, rect.color);
 			// else
 			// 	mlx_pixel_put(data->mlx, data->win, j++, i, 0);
 		}

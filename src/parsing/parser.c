@@ -6,7 +6,7 @@
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 17:26:42 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/25 11:10:41 by shilal           ###   ########.fr       */
+/*   Updated: 2023/08/04 14:36:20 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,12 @@ void	get_position(t_data *data)
 	}
 }
 
-int	parser(t_data *data, char *file_name)
+int	hexcolor(int r, int g, int b)
+{
+	return ((r << 16) | (g << 8) | b);
+}
+
+void	parser(t_data *d, char *file_name)
 {
 	int		fd;
 	char	*line;
@@ -76,12 +81,13 @@ int	parser(t_data *data, char *file_name)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		ft_lstadd_back(&data->s_map, ft_lstnew(ft_strtrim(line, "\n")));
+		ft_lstadd_back(&d->s_map, ft_lstnew(ft_strtrim(line, "\n")));
 		free(line);
 	}
-	if (!data->s_map)
+	if (!d->s_map)
 		ft_error("We have a empty file");
-	check_texture(data);
-	get_position(data);
-	return (0);
+	check_texture(d);
+	get_position(d);
+	d->ceil = hexcolor(d->txtur->c[0], d->txtur->c[1], d->txtur->c[2]);
+	d->floor = hexcolor(d->txtur->f[0], d->txtur->f[1], d->txtur->f[2]);
 }

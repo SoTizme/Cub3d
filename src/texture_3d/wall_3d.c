@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   wall_3d.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 12:06:14 by shilal            #+#    #+#             */
-/*   Updated: 2023/08/03 20:02:13 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/04 14:36:20 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void    my_mlx_pixel_put(t_img data, int x, int y, unsigned int color)
+void	my_mlx_pixel_put(t_img data, int x, int y, unsigned int color)
 {
-    int     pos;
-    char    *mlx_data_addr;
+	char	*mlx_data_addr;
+	int		pos;
 
-    pos = (y * data.size_line + x * (data.bits_per_pixel / 8));
-    mlx_data_addr = data.addr + pos;
-    *(unsigned int *)mlx_data_addr = color;
+	pos = y * data.size_line + x * (data.bits_per_pixel / 8);
+	mlx_data_addr = data.addr + pos;
+	*(unsigned int *)mlx_data_addr = color;
 }
 
 void	render_3d_map(t_data *data, t_draw *draw)
@@ -30,22 +30,12 @@ void	render_3d_map(t_data *data, t_draw *draw)
 	i = 0;
 	s = draw->f_height;
 	while (i < s)
-	{
-		my_mlx_pixel_put(data->img, draw->x, i, BLUE);
-		i++;
-	}
+		my_mlx_pixel_put(data->img, draw->x, i++, data->ceil);
 	s += draw->w_height;
 	while (i < s)
-	{
-		my_mlx_pixel_put(data->img, draw->x, i, GREEN);
-		i++;
-	}
-	s += draw->f_height;
-	while (i < s)
-	{
-		my_mlx_pixel_put(data->img, draw->x, i, 0);
-		i++;
-	}
+		my_mlx_pixel_put(data->img, draw->x, i++, GREEN);
+	while (i < HMAP)
+		my_mlx_pixel_put(data->img, draw->x, i++, data->floor);
 }
 
 void	draw_wall(t_data *data, int i)

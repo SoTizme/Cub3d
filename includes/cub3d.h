@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 12:03:56 by shilal            #+#    #+#             */
-/*   Updated: 2023/08/03 19:56:38 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/04 14:35:38 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,26 +57,27 @@
 # define WMAP 1920
 # define HMAP 1080
 
-// structs :
-
-typedef struct    s_img {
-	void    *img;
-	char    *addr;
-	int     bits_per_pixel;
-	int        size_line;
-	int        endian;
-	int        width;
-	int        height;
-}    t_img;
-
-// render struct
+// -----Drawing Wall Struct-----
 
 typedef struct s_draw
 {
 	int	x;
 	int	f_height;
 	int	w_height;
-}	t_draw;
+}		t_draw;
+
+// render struct
+
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		size_line;
+	int		endian;
+	int		width;
+	int		height;
+}			t_img;
 
 typedef struct s_rect
 {
@@ -85,7 +86,7 @@ typedef struct s_rect
 	int	width;
 	int	height;
 	int	color;
-}	t_rect;
+}		t_rect;
 
 typedef struct s_line
 {
@@ -94,7 +95,7 @@ typedef struct s_line
 	int	x2;
 	int	y2;
 	int	color;
-}	t_line;
+}		t_line;
 
 // distence struct
 
@@ -106,38 +107,38 @@ typedef struct s_distence
 	int	sx;
 	int	sy;
 	int	color;
-}	t_distence;
+}		t_distence;
 
 // player struct
 
 typedef struct s_player
 {
-	float		x;
-	float		y;
-	int			dx;
-	int			dy;
-	int			v_walk;
-	int			h_walk;
-	int			turn;
-}	t_player;
+	float	x;
+	float	y;
+	int		dx;
+	int		dy;
+	int		v_walk;
+	int		h_walk;
+	int		turn;
+}			t_player;
 
 // ray struct
 
 typedef struct s_ray
 {
-	float		x;
-	float		y;
-	float		angle;
-	float		dist;
-	int			is_vert;
-	int			up;
-	int			down;
-	int			left;
-	int			right;
-	int			content;
-}	t_ray;
+	float	x;
+	float	y;
+	float	angle;
+	float	dist;
+	int		is_vert;
+	int		up;
+	int		down;
+	int		left;
+	int		right;
+	int		content;
+}			t_ray;
 
-// ray casting struct
+// ------Raycasting Struct------ 
 
 // inter facing
 
@@ -147,7 +148,7 @@ typedef struct s_intrf
 	int	down;
 	int	left;
 	int	right;
-}	t_intrf;
+}		t_intrf;
 
 // inter section
 
@@ -159,7 +160,7 @@ typedef struct s_intrs
 	float	next_y;
 	float	x_step;
 	float	y_step;
-}	t_intrs;
+}			t_intrs;
 
 typedef struct s_horz
 {
@@ -167,7 +168,7 @@ typedef struct s_horz
 	float	x_wall;
 	float	y_wall;
 	float	dist;
-}	t_horz;
+}			t_horz;
 
 typedef struct s_vert
 {
@@ -175,72 +176,54 @@ typedef struct s_vert
 	float	x_wall;
 	float	y_wall;
 	float	dist;
-}	t_vert;
+}			t_vert;
 
-// parser 
+// ------Parsering Struct------ 
 
 typedef struct s_txtur
 {
-	char		*no;
-	char		*so;
-	char		*we;
-	char		*ea;
-	int			*f;
-	int			*c;
-}				t_txtur;
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	int		*f;
+	int		*c;
+}			t_txtur;
 
 typedef struct s_check
 {
-	int			t_c;
-	int			t_f;
-	int			t_no;
-	int			t_so;
-	int			t_we;
-	int			t_ea;
-}				t_check;
+	int	t_c;
+	int	t_f;
+	int	t_no;
+	int	t_so;
+	int	t_we;
+	int	t_ea;
+}		t_check;
 
 typedef struct s_data
 {
 	t_txtur		*txtur;
 	t_list		*s_map;
-	char		**map;
 	t_check		*check;
+	t_img		img;
+	t_player	player;
+	t_line		line;
+	t_ray		*rays;
+	float		angle;
 	void		*mlx;
 	void		*win;
-	t_img       img;
+	char		**map;
 	int			px;
 	int			py;
 	int			width;
 	int			height;
 	int			n_rays;
-	float		angle;
-	t_player	player;
-	t_line		line;
-	t_ray		*rays;
+	int			floor;
+	int			ceil;
 }				t_data;
 
-// Parsing :
+// ------------Render function------------
 
-int		check_file_format(char *file_name, char *ext);
-int		parser(t_data *dataa, char *file_name);
-void	texture_error(char *chr, char **s);
-void	check_texture(t_data *data);
-void	check_map(t_data *data);
-void	get_map(t_data *data);
-
-// Utils parsing :
-void	cont_texture(t_data *data, char c);
-int		get_the_tall_line(t_data *data);
-char	*my_strdup(char *s, int len);
-void	ft_error(char *error_msg);
-t_list	*skp_utils(t_list *lst);
-char	**get_texture(char *s);
-void	double_free(char **s);
-char	*is_dgit(char *s);
-
-// render function :
-
-// void	init_line(t_data *data, int dx, int dy, int color);
 void	init_line(t_data *data, int color);
 void	render_rect(t_data *data, t_rect rect);
 void	render_line(t_data *data, t_line line);
@@ -259,7 +242,7 @@ void	look(t_data *data);
 
 int		has_wall(t_data *data, float x, float y);
 
-// Displaying
+// Displaying :
 
 void	display(t_data *data);
 void	cast_rays(t_data *data);
@@ -279,6 +262,27 @@ t_horz	init_hor(void);
 void	v_init_intrs(t_data *data, t_intrs *intrs, t_intrf r_face, float angle);
 void	verical(t_data *data, t_intrs *intrs, t_vert *vert);
 t_vert	init_ver(void);
+
+// ------------Parsing function------------
+
+int		check_file_format(char *file_name, char *ext);
+void	parser(t_data *data, char *file_name);
+void	texture_error(char *chr, char **s);
+void	check_texture(t_data *data);
+void	check_map(t_data *data);
+void	get_map(t_data *data);
+
+// Utils parsing :
+void	cont_texture(t_data *data, char c);
+int		get_the_tall_line(t_data *data);
+char	*my_strdup(char *s, int len);
+void	ft_error(char *error_msg);
+t_list	*skp_utils(t_list *lst);
+char	**get_texture(char *s);
+void	double_free(char **s);
+char	*is_dgit(char *s);
+
+// ------------Wall function------------
 
 void	draw_wall(t_data *data, int i);
 
