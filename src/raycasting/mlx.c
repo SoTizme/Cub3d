@@ -6,7 +6,7 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 17:23:11 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/08/01 12:47:41 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/05 16:29:53 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ void	display(t_data *data)
 {
 	data->player.dx = data->player.x + cos(data->angle) * 30;
 	data->player.dy = data->player.y + sin(data->angle) * 30;
-	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, 1920, 1080, "cub3d");
 	drawing(data);
 	mlx_loop_hook(data->mlx, game, data);
 	mlx_loop(data->mlx);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 12:03:56 by shilal            #+#    #+#             */
-/*   Updated: 2023/08/04 14:35:38 by shilal           ###   ########.fr       */
+/*   Updated: 2023/08/05 16:35:49 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 
 # define PI 3.14159265359
 # define M_SPEED 3
-# define R_SPEED 0.016
+# define R_SPEED 0.033
 # define FOV 1.0471975511965976
 
 # define NO 0
@@ -220,6 +220,11 @@ typedef struct s_data
 	int			n_rays;
 	int			floor;
 	int			ceil;
+	t_img		*no;
+	t_img		*so;
+	t_img		*we;
+	t_img		*ea;
+	t_img		*tex;
 }				t_data;
 
 // ------------Render function------------
