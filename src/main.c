@@ -6,7 +6,7 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 15:51:28 by shilal            #+#    #+#             */
-/*   Updated: 2023/08/05 17:08:51 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/06 15:31:23 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	init_player(t_data *data)
 	data->player.x = data->px * TILE_SIZE + (TILE_SIZE / 2);
 	data->player.y = data->py * TILE_SIZE + (TILE_SIZE / 2);
 	data->n_rays = data->width / STRIP_WIDTH;
-	// data->tex = NULL;
 }
 
 void	get_angel(t_data *data, int i, int j)

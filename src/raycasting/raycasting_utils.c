@@ -6,7 +6,7 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 09:42:29 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/08/03 14:24:28 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/06 15:28:45 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,16 @@ float	dist_2point(float x1, float y1, float x2, float y2)
 
 int	has_wall_at(t_data *data, float x, float y)
 {
-	int	fx;
-	int	fy;
+	int		fx;
+	int		fy;
+	char	c;
 
 	if (x < 0 || x > data->width || y < 0 || y > data->height)
 		return (1);
 	fx = floor(x / TILE_SIZE);
 	fy = floor(y / TILE_SIZE);
-	if (data->map[fy][fx] == '1' || data->map[fy][fx] == ' ')
+	c = data->map[fy][fx];
+	if (!c || c == '1' || c == ' ')
 		return (1);
 	return (0);
 }

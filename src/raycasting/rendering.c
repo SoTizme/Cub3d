@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 13:18:36 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/08/04 14:32:17 by shilal           ###   ########.fr       */
+/*   Updated: 2023/08/06 15:39:20 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,6 @@ void	drawing(t_data *data)
 			&data->img.size_line, &data->img.endian);
 	cast_rays(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
-	// mlx_destroy_image(data->mlx, data->img.img);
-	// draw_player(data);
-	// init_line(data, 0);
-	// render_line(data, data->line);
 }
 
 t_distence	init_distence(t_line line)
@@ -77,12 +73,7 @@ void	render_rect(t_data *data, t_rect rect)
 	{
 		j = rect.x;
 		while (j < rect.x + rect.width)
-		{
-			// if (i != rect.y && j != rect.x)
 			mlx_pixel_put(data->mlx, data->win, j++, i, rect.color);
-			// else
-			// 	mlx_pixel_put(data->mlx, data->win, j++, i, 0);
-		}
 		i++;
 	}
 }

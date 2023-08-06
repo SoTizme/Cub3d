@@ -1,10 +1,10 @@
 F 220,100,0
 
-NO /greystone.xpm
+NO /1.xpm
 
-SO /planks.xpm
-WE /wood.xpm
-EA /planks.xpm
+SO /2.xpm
+WE /3.xpm
+EA /4.xpm
 
 C 225, 30,00000
 

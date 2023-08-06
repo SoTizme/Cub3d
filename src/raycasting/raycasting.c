@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 13:26:36 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/08/04 14:29:49 by shilal           ###   ########.fr       */
+/*   Updated: 2023/08/06 15:29:39 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,43 +41,20 @@ void	cast_one_ray(t_data *d, float angle, int i)
 	d->rays[i].right = r_face.right;
 }
 
-// void	cast_rays(t_data *d)
-// {
-// 	float	angle;
-// 	int		i;
-
-// 	angle = d->angle - (FOV / 2);
-// 	d->rays = malloc(sizeof(t_ray) * WMAP);
-// 	i = 0;
-// 	while (i < WMAP)
-// 	{
-// 		cast_one_ray(d, angle, i);
-// 		draw_wall(d, i);
-// 		// render_line(d, (t_line){
-// 		// 	d->player.x, d->player.y, d->rays[i].x, d->rays[i].y, RED
-// 		// });
-// 		angle += FOV / WMAP;
-// 		i++;
-// 	}
-// }
 void	cast_rays(t_data *d)
 {
 	float	angle;
 	int		i;
 
-	// WMAP = 1920;
 	angle = d->angle - (FOV / 2);
 	d->rays = malloc(sizeof(t_ray) * WMAP);
-	// d->size = 1920 / WMAP;
 	i = 0;
 	while (i < WMAP)
 	{
 		cast_one_ray(d, angle, i);
 		draw_wall(d, i);
-		// render_line(d, (t_line){
-		// 	d->player.x, d->player.y, d->rays[i].x, d->rays[i].y, RED
-		// });
 		angle += FOV / WMAP;
 		i++;
 	}
+	free(d->rays);
 }
