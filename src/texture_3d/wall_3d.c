@@ -6,7 +6,7 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 09:21:14 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/08/07 16:05:51 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/07 16:46:41 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,17 @@ int	config_data(t_data *d, int i)
 	if (!d->rays[i].is_vert)
 	{
 		if (d->rays[i].angle >= NO && d->rays[i].angle < SO)
-			d->tex = d->ea;
-		else
 			d->tex = d->we;
+		else
+			d->tex = d->ea;
 		x = (int)(d->rays[i].x * d->tex->width / TILE_SIZE) % d->tex->width;
 	}
 	else
 	{
 		if (d->rays[i].angle > EA && d->rays[i].angle <= WE)
-			d->tex = d->so;
-		else
 			d->tex = d->no;
+		else
+			d->tex = d->so;
 		x = (int)(d->rays[i].y * d->tex->width / TILE_SIZE) % d->tex->width;
 	}
 	return (x);
