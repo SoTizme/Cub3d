@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/01 12:06:14 by shilal            #+#    #+#             */
-/*   Updated: 2023/08/06 15:31:06 by mmoumani         ###   ########.fr       */
+/*   Created: 2023/08/07 09:21:14 by mmoumani          #+#    #+#             */
+/*   Updated: 2023/08/07 16:05:51 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,67 +22,70 @@ void	my_mlx_pixel_put(t_img data, int x, int y, unsigned int color)
 	*(unsigned int *)mlx_data_addr = color;
 }
 
-void	render_3d_map(t_data *data, float topwall, float bottomwall, t_draw *draw, int x)
+void	render_3d_map(t_data *d, t_draw *draw, int x)
 {
-	int	i;
-	int distance_center_wall;
-	int correspanding_y_coordinate;
-	char *dst;
+	int		i;
+	int		distance_center_wall;
+	int		correspanding_y_coordinate;
+	char	*dst;
+
 	i = 0;
-	while (i < topwall)
-		my_mlx_pixel_put(data->img, draw->x, i++, data->ceil);
-	while (i < bottomwall)
+	while (i < draw->t_wall)
+		my_mlx_pixel_put(d->img, draw->x, i++, d->ceil);
+	while (i < draw->b_wall)
 	{
-		distance_center_wall = i + (draw->w_height / 2) - (HMAP / 2);
+		distance_center_wall = i + (draw->h_wall / 2) - (HMAP / 2);
 		correspanding_y_coordinate = (int)(distance_center_wall
-				* (float)data->tex->height / draw->w_height)
-			% data->tex->height;
-		dst = data->tex->addr + correspanding_y_coordinate * data->tex->size_line
-			+ x * (data->tex->bits_per_pixel / 8);
-		my_mlx_pixel_put(data->img, draw->x, i, *(unsigned int *)dst);
+				* (float)d->tex->height / draw->h_wall)
+			% d->tex->height;
+		dst = d->tex->addr + correspanding_y_coordinate * d->tex->size_line
+			+ x * (d->tex->bits_per_pixel / 8);
+		my_mlx_pixel_put(d->img, draw->x, i, *(unsigned int *)dst);
 		i++;
 	}
 	while (i < HMAP)
-		my_mlx_pixel_put(data->img, draw->x, i++, data->floor);
+		my_mlx_pixel_put(d->img, draw->x, i++, d->floor);
 }
 
-int	configure_data(t_data *data, int i)
+int	config_data(t_data *d, int i)
 {
-	int		x;
+	int	x;
 
-	if (!data->rays[i].is_vert)
+	if (!d->rays[i].is_vert)
 	{
-		if (data->rays[i].angle > 0 && data->rays[i].angle < SO)
-			data->tex = data->no;
+		if (d->rays[i].angle >= NO && d->rays[i].angle < SO)
+			d->tex = d->ea;
 		else
-			data->tex = data->so;
-		x = (int)(data->rays[i].x * data->tex->width / TILE_SIZE) % data->tex->width;
+			d->tex = d->we;
+		x = (int)(d->rays[i].x * d->tex->width / TILE_SIZE) % d->tex->width;
 	}
 	else
 	{
-		if (data->rays[i].angle > EA && data->rays[i].angle < WE)
-			data->tex = data->we;
+		if (d->rays[i].angle > EA && d->rays[i].angle <= WE)
+			d->tex = d->so;
 		else
-			data->tex = data->ea;
-		x = (int)(data->rays[i].y * data->tex->width / TILE_SIZE) % data->tex->width;
+			d->tex = d->no;
+		x = (int)(d->rays[i].y * d->tex->width / TILE_SIZE) % d->tex->width;
 	}
-	return x;
+	return (x);
 }
 
 void	draw_wall(t_data *data, int i)
 {
-	float	wall_height;
-	float	correct_d;
-	float	topwall;
-	float	bottomwall;
+	float	h_wall;
+	float	update_d;
+	float	t_wall;
+	float	b_wall;
+	int		config;
 
-	correct_d = data->rays[i].dist * cos(data->rays[i].angle - data->angle);
-	wall_height = (TILE_SIZE / correct_d) * fabs((WMAP / 2) / tan(FOV / 2));
-	topwall = ((HMAP / 2) - (wall_height / 2));
-	if (topwall < 0)
-		topwall = 0;
-	bottomwall = ((HMAP / 2) + (wall_height / 2));
-	if (bottomwall > HMAP)
-		bottomwall = HMAP;
-	render_3d_map(data, topwall, bottomwall, &(t_draw){i, topwall, wall_height}, configure_data(data, i));
+	update_d = data->rays[i].dist * cos(data->rays[i].angle - data->angle);
+	h_wall = (TILE_SIZE / update_d) * fabs((WMAP / 2) / tan(FOV / 2));
+	t_wall = ((HMAP / 2) - (h_wall / 2));
+	if (t_wall < 0)
+		t_wall = 0;
+	b_wall = ((HMAP / 2) + (h_wall / 2));
+	if (b_wall > HMAP)
+		b_wall = HMAP;
+	config = config_data(data, i);
+	render_3d_map(data, &(t_draw){i, h_wall, t_wall, b_wall}, config);
 }

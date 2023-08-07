@@ -6,7 +6,7 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 09:42:29 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/08/06 15:28:45 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/07 15:11:45 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ int	has_wall_at(t_data *data, float x, float y)
 	int		fy;
 	char	c;
 
-	if (x < 0 || x > data->width || y < 0 || y > data->height)
+	if (x < 0 || x >= data->width || y < 0 || y >= data->height)
 		return (1);
 	fx = floor(x / TILE_SIZE);
 	fy = floor(y / TILE_SIZE);
 	c = data->map[fy][fx];
-	if (!c || c == '1' || c == ' ')
+	if (!c || (c == '1' || c == ' '))
 		return (1);
 	return (0);
 }

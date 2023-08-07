@@ -6,7 +6,7 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 12:03:56 by shilal            #+#    #+#             */
-/*   Updated: 2023/08/05 16:35:49 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/07 15:07:56 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,6 @@
 # include <errno.h>
 # include <limits.h>
 
-// COLORS
-
-# define BLUE 0x7eabf2
-# define RED 0xFF0000
-# define YELLOW 0xF0FF00
-# define GREEN 0x4e947e
-
 // keys press
 
 # define UP 13
@@ -42,7 +35,7 @@
 # define ESC 53
 
 # define PI 3.14159265359
-# define M_SPEED 3
+# define M_SPEED 4
 # define R_SPEED 0.033
 # define FOV 1.0471975511965976
 
@@ -52,7 +45,6 @@
 # define WE 4.72
 
 # define TILE_SIZE 64
-# define STRIP_WIDTH 1
 
 # define WMAP 1920
 # define HMAP 1080
@@ -61,9 +53,10 @@
 
 typedef struct s_draw
 {
-	int	x;
-	int	f_height;
-	int	w_height;
+	int		x;
+	float	h_wall;
+	float	t_wall;
+	float	b_wall;
 }		t_draw;
 
 // render struct
@@ -78,36 +71,6 @@ typedef struct s_img
 	int		width;
 	int		height;
 }			t_img;
-
-typedef struct s_rect
-{
-	int	x;
-	int	y;
-	int	width;
-	int	height;
-	int	color;
-}		t_rect;
-
-typedef struct s_line
-{
-	int	x1;
-	int	y1;
-	int	x2;
-	int	y2;
-	int	color;
-}		t_line;
-
-// distence struct
-
-typedef struct s_distence
-{
-	int	dis;
-	int	dx;
-	int	dy;
-	int	sx;
-	int	sy;
-	int	color;
-}		t_distence;
 
 // player struct
 
@@ -205,9 +168,7 @@ typedef struct s_data
 	t_txtur		*txtur;
 	t_list		*s_map;
 	t_check		*check;
-	t_img		img;
 	t_player	player;
-	t_line		line;
 	t_ray		*rays;
 	float		angle;
 	void		*mlx;
@@ -217,9 +178,9 @@ typedef struct s_data
 	int			py;
 	int			width;
 	int			height;
-	int			n_rays;
 	int			floor;
 	int			ceil;
+	t_img		img;
 	t_img		*no;
 	t_img		*so;
 	t_img		*we;
@@ -227,14 +188,11 @@ typedef struct s_data
 	t_img		*tex;
 }				t_data;
 
-// ------------Render function------------
+// ------------main function------------
 
-void	init_line(t_data *data, int color);
-void	render_rect(t_data *data, t_rect rect);
-void	render_line(t_data *data, t_line line);
-void	draw_map2d(t_data *data);
-void	draw_player(t_data *data);
-void	drawing(t_data *data);
+void	init_data(t_data *data);
+void	get_angel(t_data *data, int i, int j);
+t_img	*new_img(t_data *data, char *path);
 
 // move function :
 
@@ -249,6 +207,7 @@ int		has_wall(t_data *data, float x, float y);
 
 // Displaying :
 
+void	drawing(t_data *data);
 void	display(t_data *data);
 void	cast_rays(t_data *data);
 
