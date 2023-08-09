@@ -6,7 +6,7 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 13:26:36 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/08/06 15:29:39 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/09 09:49:10 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	cast_rays(t_data *d)
 	float	angle;
 	int		i;
 
-	angle = d->angle - (FOV / 2);
+	angle = d->player.angle - (FOV / 2);
 	d->rays = malloc(sizeof(t_ray) * WMAP);
 	i = 0;
 	while (i < WMAP)

@@ -6,7 +6,7 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 12:03:56 by shilal            #+#    #+#             */
-/*   Updated: 2023/08/07 15:07:56 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/09 11:24:35 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # define ESC 53
 
 # define PI 3.14159265359
-# define M_SPEED 4
+# define M_SPEED 6
 # define R_SPEED 0.033
 # define FOV 1.0471975511965976
 
@@ -78,8 +78,7 @@ typedef struct s_player
 {
 	float	x;
 	float	y;
-	int		dx;
-	int		dy;
+	float	angle;
 	int		v_walk;
 	int		h_walk;
 	int		turn;
@@ -170,7 +169,6 @@ typedef struct s_data
 	t_check		*check;
 	t_player	player;
 	t_ray		*rays;
-	float		angle;
 	void		*mlx;
 	void		*win;
 	char		**map;

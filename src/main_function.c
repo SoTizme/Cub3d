@@ -6,7 +6,7 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 10:06:43 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/08/07 10:08:47 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/09 09:50:25 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_img	*new_img(t_data *data, char *path)
 void	init_data(t_data *data)
 {
 	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, 1920, 1080, "cub3d");
+	data->win = mlx_new_window(data->mlx, WMAP, HMAP, "cub3d");
 	data->width *= TILE_SIZE;
 	data->height *= TILE_SIZE;
 	data->player.x = data->px * TILE_SIZE + (TILE_SIZE / 2);
@@ -71,11 +71,11 @@ void	init_data(t_data *data)
 void	get_angel(t_data *data, int i, int j)
 {
 	if (data->map[i][j] == 'N')
-		data->angle = NO;
+		data->player.angle = NO;
 	else if (data->map[i][j] == 'S')
-		data->angle = SO;
+		data->player.angle = SO;
 	else if (data->map[i][j] == 'E')
-		data->angle = EA;
+		data->player.angle = EA;
 	else if (data->map[i][j] == 'W')
-		data->angle = WE;
+		data->player.angle = WE;
 }

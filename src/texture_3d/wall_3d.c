@@ -6,7 +6,7 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 09:21:14 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/08/07 16:46:41 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/09 11:12:11 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,24 @@ int	config_data(t_data *d, int i)
 	return (x);
 }
 
+// to find height of the wall need this operation :
+// (wall height / distance to wall) * distance to projection plane 
+
+// distance to wall = ray distance * cos(angle - player angle)
+// wall height = TILE_SIZE
+// distance to projection plane = (WMAP / 2) / tan(FOV / 2);
+
 void	draw_wall(t_data *data, int i)
 {
 	float	h_wall;
-	float	update_d;
 	float	t_wall;
 	float	b_wall;
+	float	distance_to_wall;
 	int		config;
 
-	update_d = data->rays[i].dist * cos(data->rays[i].angle - data->angle);
-	h_wall = (TILE_SIZE / update_d) * fabs((WMAP / 2) / tan(FOV / 2));
+	distance_to_wall = data->rays[i].dist
+		* cos(data->rays[i].angle - data->player.angle);
+	h_wall = (TILE_SIZE / distance_to_wall) * (WMAP / 2) / tan(FOV / 2);
 	t_wall = ((HMAP / 2) - (h_wall / 2));
 	if (t_wall < 0)
 		t_wall = 0;

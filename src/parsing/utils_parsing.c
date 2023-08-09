@@ -6,7 +6,7 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:31:54 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/25 12:15:32 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/09 12:15:55 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ char	**get_texture(char *s)
 	str[0][j] = '\0';
 	while (s[i] && s[i] == ' ')
 		i++;
-	str[1] = ft_strdup(s + i);
+	str[1] = ft_strdup(s + i-1);
 	str[2] = NULL;
 	return (str);
 }
