@@ -1,6 +1,6 @@
 NAME = cub3d_bonus
 
-SRCS = src/main_bonus.c src/main_function.c
+SRCS = src/main.c src/main_function.c
 
 PFILES = parser.c check_texture.c errers_pars.c check_map.c utils_parsing.c 
 
@@ -20,7 +20,7 @@ GTL := $(addprefix src/get_line/, $(GTL))
 
 RM = rm -f
 CC = cc
-CFLAGS = -Wall -Wextra -Werror# -fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror # -fsanitize=address -g3
 MLX = -lmlx -framework OpenGL -framework AppKit
 
 all: $(NAME)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_bonus.c                                       :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 15:51:28 by shilal            #+#    #+#             */
-/*   Updated: 2023/08/09 17:03:52 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/09 12:17:23 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		ft_error("You have more/less 2 argument");
 	data = (t_data){0};
-	// data = (t_data*)malloc(sizeof(t_data));
-	// data = &(t_data){0};
 	t = (t_txtur){0};
 	check = (t_check){0};
 	t.c = (int *)malloc(3 * sizeof(int));

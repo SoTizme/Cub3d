@@ -6,7 +6,7 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 10:06:43 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/08/09 15:34:39 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/09 20:56:36 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ t_img	*new_img(t_data *data, char *path)
 		ft_error(strerror(errno));
 	img->img = mlx_xpm_file_to_image(data->mlx, path,
 			&img->width, &img->height);
+	if (!img->img)
+		ft_error("invalid texture path");
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
 			&img->size_line, &img->endian);
 	return (img);
@@ -57,7 +59,6 @@ t_img	*new_img(t_data *data, char *path)
 void	init_data(t_data *data)
 {
 	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, WMAP, HMAP, "cub3d");
 	data->width *= TILE_SIZE;
 	data->height *= TILE_SIZE;
 	data->player.x = data->px * TILE_SIZE + (TILE_SIZE / 2);
@@ -66,6 +67,7 @@ void	init_data(t_data *data)
 	data->so = new_img(data, data->txtur->so);
 	data->we = new_img(data, data->txtur->we);
 	data->ea = new_img(data, data->txtur->ea);
+	data->win = mlx_new_window(data->mlx, WMAP, HMAP, "cub3d");
 }
 
 void	get_angel(t_data *data, int i, int j)

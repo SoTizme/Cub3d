@@ -6,7 +6,7 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 12:03:56 by shilal            #+#    #+#             */
-/*   Updated: 2023/08/09 17:14:24 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/09 21:06:01 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,11 @@
 # define RIGHT 2
 # define R_LOOK 124
 # define L_LOOK 123
-# define L_CLICK 1
-# define R_CLICK 2
-# define S_UP 4
-# define S_DOWN 5
 # define ESC 53
 
 # define PI 3.14159265359
 # define M_SPEED 6
-# define R_SPEED 0.017
+# define R_SPEED 0.033
 # define FOV 1.0471975511965976
 
 # define NO 0
