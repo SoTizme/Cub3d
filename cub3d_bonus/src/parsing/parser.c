@@ -6,7 +6,7 @@
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 17:26:42 by shilal            #+#    #+#             */
-/*   Updated: 2023/08/04 14:36:20 by shilal           ###   ########.fr       */
+/*   Updated: 2023/08/10 17:47:07 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,6 @@ void	get_position(t_data *data)
 	}
 }
 
-int	hexcolor(int r, int g, int b)
-{
-	return ((r << 16) | (g << 8) | b);
-}
-
 void	parser(t_data *d, char *file_name)
 {
 	int		fd;
@@ -88,6 +83,6 @@ void	parser(t_data *d, char *file_name)
 		ft_error("We have a empty file");
 	check_texture(d);
 	get_position(d);
-	d->ceil = hexcolor(d->txtur->c[0], d->txtur->c[1], d->txtur->c[2]);
-	d->floor = hexcolor(d->txtur->f[0], d->txtur->f[1], d->txtur->f[2]);
+	d->ceil = (d->txtur->c[0] << 16) | (d->txtur->c[1] << 8) | d->txtur->c[2];
+	d->floor = (d->txtur->f[0] << 16) | (d->txtur->f[1] << 8) | d->txtur->f[2];
 }
