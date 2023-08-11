@@ -6,11 +6,28 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 10:36:46 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/08/09 15:34:39 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/11 11:05:34 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+int	mouse(int x, int y, t_data *data)
+{
+	(void)y;
+	data->player.turn = 0;
+	if (x > data->old_x)
+	{
+		data->player.turn = 1;
+		data->old_x = x;
+	}
+	else if (x < data->old_x)
+	{
+		data->player.turn = -1;
+		data->old_x = x;
+	}
+	return (0);
+}
 
 void	drawing(t_data *data)
 {

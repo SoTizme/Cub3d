@@ -6,7 +6,7 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 17:23:11 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/08/09 21:05:18 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/11 11:05:23 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,23 +51,6 @@ int	key_up(int keycode, t_data *data)
 		data->player.turn = 0;
 	if (keycode == L_LOOK)
 		data->player.turn = 0;
-	return (0);
-}
-
-int	mouse(int x, int y, t_data *data)
-{
-	(void)y;
-	data->player.turn = 0;
-	if (x > data->old_x)
-	{
-		data->player.turn = 1;
-		data->old_x = x;
-	}
-	else if (x < data->old_x)
-	{
-		data->player.turn = -1;
-		data->old_x = x;
-	}
 	return (0);
 }
 
