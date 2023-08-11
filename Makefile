@@ -46,8 +46,8 @@ $(B_NAME): $(B_FILES)
 	$(CC) $(CFLAGS) cub3d_bonus/libft/libft.a $(B_FILES) $(MLX) -o $(B_NAME)
 
 clean:
-	@make clean -C cub3d_mandatory/libft
-	@make clean -C cub3d_bonus/libft
+	@make fclean -C cub3d_mandatory/libft
+	@make fclean -C cub3d_bonus/libft
 
 fclean: clean
 	$(RM) $(NAME) $(B_NAME)

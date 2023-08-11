@@ -1,10 +1,10 @@
 F 115, 115, 115
 
-NO m1.xpm
+NO textures/m1.xpm
 
-SO m2.xpm
-WE m3.xpm
-EA m4.xpm
+SO textures/m2.xpm
+WE textures/m3.xpm
+EA textures/m4.xpm
 
 C 36, 113, 163
 
