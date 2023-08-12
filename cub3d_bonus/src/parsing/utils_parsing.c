@@ -6,7 +6,7 @@
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:31:54 by shilal            #+#    #+#             */
-/*   Updated: 2023/08/10 17:46:54 by shilal           ###   ########.fr       */
+/*   Updated: 2023/08/12 11:42:03 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,14 @@ char	**get_texture(char *s)
 		i++;
 	}
 	str[0][j] = '\0';
-	while (s[i] && s[i] == ' ')
-		i++;
-	str[1] = ft_strdup(s + i - 1);
-	str[2] = NULL;
+	if (s[j] == ' ')
+	{
+		while (s[i] && s[i] == ' ')
+			i++;
+		str[1] = ft_strdup(s + i - 1);
+		str[2] = NULL;
+	}
+	else
+		str[1] = NULL;
 	return (str);
 }

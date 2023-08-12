@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 12:03:56 by shilal            #+#    #+#             */
-/*   Updated: 2023/08/11 11:06:01 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/12 12:43:21 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,6 +239,7 @@ void	get_map(t_data *data);
 void	cont_texture(t_data *data, char c);
 int		get_the_tall_line(t_data *data);
 char	*my_strdup(char *s, int len);
+int		cher_if_line_valid(char *s);
 void	ft_error(char *error_msg);
 t_list	*skp_utils(t_list *lst);
 char	**get_texture(char *s);

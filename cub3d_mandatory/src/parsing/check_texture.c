@@ -6,7 +6,7 @@
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 15:50:51 by shilal            #+#    #+#             */
-/*   Updated: 2023/08/10 17:47:31 by shilal           ###   ########.fr       */
+/*   Updated: 2023/08/12 12:43:55 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,17 @@ void	check_color(t_data *data, char *line, char chr)
 	char	**s;
 	int		i;
 
-	i = 0;
-	if (line[ft_strlen(line) - 1] == ',')
-		ft_error("The prototype of the color is (N,N,N) and N (0 -> 255)");
+	i = -1;
 	if (line[0] == chr && line[1] == ' ')
 	{
+		if (line[ft_strlen(line) - 1] == ',')
+			ft_error("The prototype of the color is (N,N,N)");
+		while (line[++i])
+		{
+			if (line[i + 1] && line[i] == ',' && line[i + 1] == ',')
+				ft_error("The prototype of the color is (N,N,N)");
+		}
+		i = 0;
 		colrs = ft_split(line + 1, ',');
 		while (colrs[i])
 		{
@@ -116,10 +122,12 @@ void	check_texture(t_data *d)
 	int		i;
 
 	tmp = d->s_map;
+	if (ft_lstsize(tmp) < 9)
+		ft_error("Invalid map");
 	i = 7;
 	while (tmp && i)
 	{
-		if (tmp->content[0])
+		if (tmp->content[0] && cher_if_line_valid(tmp->content))
 		{
 			texture(tmp->content, d);
 			check_color(d, tmp->content, 'F');

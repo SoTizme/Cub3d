@@ -6,7 +6,7 @@
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 14:42:32 by shilal            #+#    #+#             */
-/*   Updated: 2023/08/10 17:48:00 by shilal           ###   ########.fr       */
+/*   Updated: 2023/08/12 17:08:18 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ int	the_middle(char **s, int j, int i, int len)
 			if (i != 0 && (s[i - 1][j] == ' ' || s[i - 1][j] == '1'))
 			{
 				if (i != len && (s[i + 1][j] == ' ' || s[i + 1][j] == '1'))
-				{
 					return (1);
-				}
 				else if (i == len)
 					return (1);
 			}
+			else if (i == 0 && (s[i + 1][j] == '0'))
+				return (0);
 			else if (i == 0)
 				return (1);
 		}
@@ -96,7 +96,7 @@ void	check_the_map(t_data *data)
 			if (data->map[i][j] == '1')
 			{
 				check_the_end(data->map[i], data, i);
-				check_the_middle(data, i, j);
+				check_the_middle(data, i, 0);
 				break ;
 			}
 			else if (data->map[i][j] && data->map[i][j] == '0')
@@ -111,7 +111,7 @@ void	check_map(t_data *data)
 
 	i = 0;
 	data->height = ft_lstsize(skp_utils(data->s_map));
-	if (data->height == 1)
+	if (data->height == 0)
 		ft_error("Map missing");
 	data->map = (char **)malloc((data->height + 1) * sizeof(char *));
 	data->width = get_the_tall_line(data);

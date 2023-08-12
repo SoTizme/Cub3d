@@ -6,23 +6,48 @@
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 17:26:42 by shilal            #+#    #+#             */
-/*   Updated: 2023/08/10 17:46:26 by shilal           ###   ########.fr       */
+/*   Updated: 2023/08/12 16:55:52 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+int	cher_if_line_valid(char *s)
+{
+	int	i;
+
+	i = -1; 
+	if (!s)
+		return (1);
+	while (s[++i])
+	{
+		if (s[i] != ' ')
+			return (1);
+	}
+	return (0);
+}
+
 t_list	*skp_utils(t_list *lst)
 {
 	int	i;
 
-	i = 1;
-	while (lst->next)
+	i = 0;
+	while (lst)
 	{
-		if (i > 6 && lst->content[0])
+		if (i == 6)
 			break ;
 		if (lst->content[0])
-			i++;
+		{
+			if (cher_if_line_valid(lst->content) == 1)
+				i++;
+		}
+		lst = lst->next;
+	}
+	while (lst)
+	{
+		if ((lst->content[0] && lst->content[0] != ' ')
+			|| (ft_strchr(lst->content, '1')))
+			break ;
 		lst = lst->next;
 	}
 	return (lst);

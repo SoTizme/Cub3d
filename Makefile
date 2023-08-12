@@ -1,6 +1,6 @@
-NAME = cub3d
+NAME = cub3D
 
-B_NAME = bonus_cub3d
+B_NAME = bonus_cub3D
 
 SRCS = src/main.c src/main_function.c 
 
@@ -30,7 +30,7 @@ B_FILES := $(addprefix cub3d_bonus/, $(B_FILES))
 
 RM = rm -f
 CC = cc
-CFLAGS = -Wall -Wextra -Werror # -fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror
 MLX = -lmlx -framework OpenGL -framework AppKit
 
 all: $(NAME)

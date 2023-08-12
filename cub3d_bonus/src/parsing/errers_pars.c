@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errers_pars.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 18:38:08 by shilal            #+#    #+#             */
-/*   Updated: 2023/07/24 11:23:15 by shilal           ###   ########.fr       */
+/*   Updated: 2023/08/12 12:02:07 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_error(char *error_msg)
 {
 	printf("Error : %s\n", error_msg);
-	exit (0);
+	exit (1);
 }
 
 void	texture_error(char *chr, char **s)
