@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 12:03:56 by shilal            #+#    #+#             */
-/*   Updated: 2023/08/12 12:43:21 by shilal           ###   ########.fr       */
+/*   Updated: 2023/08/13 18:45:42 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define RIGHT 2
 # define R_LOOK 124
 # define L_LOOK 123
+# define KEY 49
 # define ESC 53
 
 # define PI 3.14159265359
@@ -129,6 +130,7 @@ typedef struct s_horz
 	int		wall;
 	float	x_wall;
 	float	y_wall;
+	char	content;
 	float	dist;
 }			t_horz;
 
@@ -137,6 +139,7 @@ typedef struct s_vert
 	int		wall;
 	float	x_wall;
 	float	y_wall;
+	char	content;
 	float	dist;
 }			t_vert;
 
@@ -183,6 +186,7 @@ typedef struct s_data
 	t_img		*so;
 	t_img		*we;
 	t_img		*ea;
+	t_img		*door;
 	t_img		*tex;
 	int			old_x;
 }				t_data;
@@ -250,5 +254,6 @@ char	*is_dgit(char *s);
 
 void	draw_wall(t_data *data, int i);
 int		mouse(int x, int y, t_data *data);
+char	get_content(t_data *data, float x, float y);
 
 #endif

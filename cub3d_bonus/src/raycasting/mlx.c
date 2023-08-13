@@ -6,7 +6,7 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 17:23:11 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/08/11 18:41:05 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/13 17:43:26 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,29 @@ int	ft_close(void)
 {
 	printf("The game is closed\n");
 	exit (0);
+}
+
+void open_door(t_data * data)
+{
+	int x;
+	int y;
+	int i;
+
+	i = 0;
+	while (i < TILE_SIZE)
+	{
+		x = data->player.x + cos(data->player.angle) * i;
+		y = data->player.y + sin(data->player.angle) * i;
+		x = floor(x / TILE_SIZE);
+		y = floor(y / TILE_SIZE);
+		if (data->map[y][x] == '2')
+		{
+			data->map[y][x] = '3';
+			break ;
+		}
+		i += 5;
+	}
+	drawing(data);
 }
 
 int	key_down(int keycode, t_data *data)
@@ -34,6 +57,8 @@ int	key_down(int keycode, t_data *data)
 		data->player.turn = 1;
 	if (keycode == L_LOOK)
 		data->player.turn = -1;
+	if (keycode == KEY)
+		open_door(data);
 	return (0);
 }
 

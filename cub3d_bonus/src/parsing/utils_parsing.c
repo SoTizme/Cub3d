@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:31:54 by shilal            #+#    #+#             */
-/*   Updated: 2023/08/13 14:30:22 by shilal           ###   ########.fr       */
+/*   Updated: 2023/08/13 18:46:55 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	get_map(t_data *data)
 		while (tmp->content[j])
 		{
 			c = tmp->content[j];
-			if (c != ' ' && c != '1' && c != '0' && c != 'S' && c != 'N'
+			if (c != ' ' && c != '1' && c != '2' && c != '0' && c != 'S' && c != 'N'
 				&& c != 'W' && c != 'E' && c != 9)
 				ft_error("Ther's an  error in your map");
 			cont_texture(data, c);

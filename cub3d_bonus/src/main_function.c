@@ -6,7 +6,7 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 10:06:43 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/08/09 20:56:36 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/13 17:25:52 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ void	init_data(t_data *data)
 	data->so = new_img(data, data->txtur->so);
 	data->we = new_img(data, data->txtur->we);
 	data->ea = new_img(data, data->txtur->ea);
-	data->win = mlx_new_window(data->mlx, WMAP, HMAP, "cub3d");
+	data->door = new_img(data, "door.xpm");
+	data->win = mlx_new_window(data->mlx, WMAP, HMAP, "cub3D");
 }
 
 void	get_angel(t_data *data, int i, int j)

@@ -6,7 +6,7 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 09:42:29 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/08/07 15:11:45 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/13 15:17:48 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	has_wall_at(t_data *data, float x, float y)
 	fx = floor(x / TILE_SIZE);
 	fy = floor(y / TILE_SIZE);
 	c = data->map[fy][fx];
-	if (!c || (c == '1' || c == ' '))
+	if (!c || (c == '1' || c == ' ' || c == '2'))
 		return (1);
 	return (0);
 }
@@ -59,6 +59,7 @@ void	initialition(t_data *data, t_horz *horz, t_vert *vert, int i)
 		data->rays[i].dist = vert->dist;
 		data->rays[i].x = vert->x_wall;
 		data->rays[i].y = vert->y_wall;
+		data->rays[i].content = vert->content;
 		data->rays[i].is_vert = 1;
 	}
 	else
@@ -66,6 +67,7 @@ void	initialition(t_data *data, t_horz *horz, t_vert *vert, int i)
 		data->rays[i].dist = horz->dist;
 		data->rays[i].x = horz->x_wall;
 		data->rays[i].y = horz->y_wall;
+		data->rays[i].content = horz->content;
 		data->rays[i].is_vert = 0;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_function.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 10:06:43 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/08/13 14:21:58 by shilal           ###   ########.fr       */
+/*   Updated: 2023/08/13 18:56:58 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	init_data(t_data *data)
 	data->so = new_img(data, data->txtur->so);
 	data->we = new_img(data, data->txtur->we);
 	data->ea = new_img(data, data->txtur->ea);
-	data->win = mlx_new_window(data->mlx, WMAP, HMAP, "cub3d");
+	data->win = mlx_new_window(data->mlx, WMAP, HMAP, "cub3D");
 }
 
 void	get_angel(t_data *data, int i, int j)

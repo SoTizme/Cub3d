@@ -6,7 +6,7 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 09:37:50 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/08/09 18:28:39 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/13 15:03:59 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	horizontal(t_data *data, t_intrs *intrs, t_horz *horz)
 			horz->wall = 1;
 			horz->x_wall = intrs->next_x;
 			horz->y_wall = intrs->next_y;
+			horz->content = get_content(data, horz->x_wall, horz->y_wall);
 			break ;
 		}
 		else

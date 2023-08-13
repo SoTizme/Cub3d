@@ -6,7 +6,7 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 09:21:14 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/08/11 11:47:58 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/13 17:23:20 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int	config_data(t_data *d, int i)
 			d->tex = d->so;
 		x = (int)(d->rays[i].y * d->tex->width / TILE_SIZE) % d->tex->width;
 	}
+	if (d->rays[i].content == '2')
+		d->tex = d->door;
 	return (x);
 }
 

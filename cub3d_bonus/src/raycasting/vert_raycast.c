@@ -6,7 +6,7 @@
 /*   By: mmoumani <mmoumani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 09:39:26 by mmoumani          #+#    #+#             */
-/*   Updated: 2023/08/09 18:28:21 by mmoumani         ###   ########.fr       */
+/*   Updated: 2023/08/13 17:28:09 by mmoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	verical(t_data *data, t_intrs *intrs, t_vert *vert)
 			vert->wall = 1;
 			vert->x_wall = intrs->next_x;
 			vert->y_wall = intrs->next_y;
+			vert->content = get_content(data, intrs->next_x, intrs->next_y);
 			break ;
 		}
 		else
