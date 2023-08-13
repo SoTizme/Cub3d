@@ -6,7 +6,7 @@
 /*   By: shilal <shilal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:31:54 by shilal            #+#    #+#             */
-/*   Updated: 2023/08/12 11:42:03 by shilal           ###   ########.fr       */
+/*   Updated: 2023/08/13 14:21:16 by shilal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,21 +105,17 @@ char	**get_texture(char *s)
 	int		j;
 
 	str = (char **)malloc(3 * sizeof(char *));
-	i = 0;
+	i = -1;
 	j = -1;
 	str[0] = malloc(3);
-	while (j < 2 && s[i])
-	{
-		if (s[i] != ' ')
-			str[0][++j] = s[i];
-		i++;
-	}
+	while (j < 2 && s[++i])
+		str[0][++j] = s[i];
 	str[0][j] = '\0';
 	if (s[j] == ' ')
 	{
 		while (s[i] && s[i] == ' ')
 			i++;
-		str[1] = ft_strdup(s + i - 1);
+		str[1] = ft_strdup(s + i);
 		str[2] = NULL;
 	}
 	else
